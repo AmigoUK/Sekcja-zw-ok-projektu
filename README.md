@@ -7,7 +7,9 @@ Narracyjna gra edukacyjna: wcielasz się w facylitatora post-mortem i przesłuch
 ## Struktura repozytorium
 
 - `sekcja-zwlok.html` — gra (jeden plik, zero backendu). Obsługiwane silniki AI: Anthropic, OpenAI, GLM/Zhipu, DeepSeek, Groq (Llama) oraz lokalne: LM Studio, Ollama, llama.cpp i dowolny endpoint OpenAI-compatible. Ranking z autoryzacją mailową (tryb demo bez backendu), regulamin i polityka prywatności wbudowane.
-- `ranking-server.js` — backend rankingu (Node.js + express + nodemailer): kody na email, maskowanie adresów (3 pierwsze + 3 ostatnie znaki), leaderboard. Konfiguracja w komentarzu na górze pliku.
+- `ranking-server.js` — backend rankingu i pojedynków (Node.js + express + nodemailer): kody na email, maskowanie adresów (3 pierwsze + 3 ostatnie znaki), leaderboard, wyzwania. Konfiguracja w komentarzu na górze pliku.
+- `test/` — testy `node:test` (bez zależności zewnętrznych): `npm test`.
+- `docs/superpowers/specs/` — zatwierdzone specyfikacje funkcji.
 - `system-prompt.md` — pełny prompt jednoplikowy (scenariusz FENIKS) do wklejenia w dowolny czat LLM.
 - `gpt/` — pakiet Custom GPT: `gpt-master-prompt.md` (Instructions, <8000 znaków) + 6 scenariuszy, talia modyfikatorów losowych i szablon scenariusza (pliki wiedzy).
 - `img/` — grafiki w stylu polskiego komiksu kryminalnego lat 70. (opis niżej).
@@ -35,10 +37,32 @@ Ranking ogólny: uruchom `ranking-server.js` i ustaw `RANKING_API` na początku 
 ```
 npm install
 SMTP_HOST=smtp.example.com SMTP_PORT=587 SMTP_USER=... SMTP_PASS=... \
-MAIL_FROM="Sekcja Zwłok <ranking@example.com>" PORT=3001 npm start
+MAIL_FROM="Sekcja Zwłok <ranking@example.com>" \
+GAME_URL="https://twoja-domena/sekcja-zwlok.html" CHALLENGE_SALT="losowy-ciag" \
+PORT=3001 npm start
 ```
 
-Bez zmiennych SMTP serwer działa w trybie deweloperskim (kody logowane na konsolę zamiast wysyłane mailem). Plik `ranking-data.json` z wynikami powstaje obok serwera i jest celowo wykluczony z repozytorium — zawiera pełne adresy e-mail graczy.
+Bez zmiennych SMTP serwer działa w trybie deweloperskim: treść maili i gotowe linki lądują na konsoli zamiast w skrzynkach. Pozwala to przejść cały przepływ lokalnie, łącznie z pojedynkiem, bez wysyłania czegokolwiek. Plik `ranking-data.json` powstaje obok serwera i jest celowo wykluczony z repozytorium — zawiera pełne adresy e-mail graczy.
+
+| Zmienna | Rola |
+|---|---|
+| `SMTP_*`, `MAIL_FROM` | Wysyłka maili. Brak = tryb deweloperski (konsola). |
+| `GAME_URL` | Adres, pod którym stoi gra — potrzebny do zbudowania linku w zaproszeniu. **Brak wyłącza pojedynki.** |
+| `CHALLENGE_SALT` | Sól do skrótów adresów przy limitowaniu zaproszeń. Brak = losowa przy starcie (limity resetują się po restarcie). |
+| `CORS_ORIGIN` | Ograniczenie źródła żądań. Domyślnie `*`. |
+| `DATA_FILE` | Ścieżka pliku danych. Używane przez testy, żeby nie dotykać prawdziwego rankingu. |
+
+## Pojedynki
+
+Gracz, który zapisał wynik w rankingu, może wyzwać znajomego: po zapisie modal proponuje wysłanie zaproszenia. Wyzwany dostaje link, gra ten sam scenariusz i po debriefie odpowiada — anonimowo albo przy okazji zapisując wynik w rankingu ogólnym. Wyzywający dostaje powiadomienie o rozstrzygnięciu.
+
+Zasady, które warto znać przed uruchomieniem publicznie:
+
+- **Adres osoby wyzwanej nie jest nigdzie zapisywany.** Rekord pojedynku zawiera wyłącznie adres wyzywającego — ten, który jest już w rankingu za zgodą. Limit zaproszeń na jeden adres działa na nieodwracalnym skrócie z solą.
+- **Treść zaproszenia to sztywny szablon.** Nie ma pola na wolny tekst, a nick pobierany jest z bazy rankingu, nie z żądania — mail może więc zawierać tylko to, co nadawca już opublikował publicznie pod zweryfikowanym adresem.
+- **Limity:** 5 zaproszeń na dobę od jednego gracza, 2 na dobę na jeden adres docelowy niezależnie od nadawcy. Linki wygasają po 14 dniach, na jedno wyzwanie przypada jedna odpowiedź.
+
+Projekt funkcji: [`docs/superpowers/specs/2026-08-12-pojedynek-wyzwanie-design.md`](docs/superpowers/specs/2026-08-12-pojedynek-wyzwanie-design.md).
 
 ## Licencja
 

@@ -2,20 +2,38 @@
  * Backend rankingu gry „Sekcja zwłok projektu"
  * ---------------------------------------------
  * Uruchomienie:
- *   npm install express nodemailer
+ *   npm install
  *   SMTP_HOST=smtp.example.com SMTP_PORT=587 SMTP_USER=... SMTP_PASS=... \
- *   MAIL_FROM="Sekcja Zwłok <ranking@example.com>" PORT=3001 node ranking-server.js
+ *   MAIL_FROM="Sekcja Zwłok <ranking@example.com>" \
+ *   GAME_URL="https://twoja-domena/sekcja-zwlok.html" CHALLENGE_SALT="losowy-ciag" \
+ *   PORT=3001 node ranking-server.js
  *
  * Następnie w sekcja-zwlok.html ustaw: const RANKING_API = "https://twoj-serwer:3001";
+ * Bez SMTP_HOST działa tryb deweloperski: treść maili i linki lądują na konsoli.
+ * Bez GAME_URL pojedynki są wyłączone (nie da się zbudować linku w zaproszeniu).
  *
  * Endpointy:
- *   POST /api/request-code  {email, nick}                  -> wysyła 6-cyfrowy kod na email
- *   POST /api/submit-score  {email, nick, code, score, scenario} -> weryfikuje kod, zapisuje wynik
- *   GET  /api/leaderboard                                  -> top 50, e-maile ZAMASKOWANE
+ *   POST /api/request-code        {email, nick}                    -> wysyła 6-cyfrowy kod na email
+ *   POST /api/submit-score        {email, nick, code, score, scenario, challengeId?}
+ *                                                                  -> weryfikuje kod, zapisuje wynik,
+ *                                                                     zwraca bilet na wyzwanie,
+ *                                                                     opcjonalnie rozstrzyga pojedynek
+ *   GET  /api/leaderboard                                          -> top 50, e-maile ZAMASKOWANE
+ *   POST /api/challenge           {ticket, targetName, targetEmail} -> wysyła zaproszenie do pojedynku
+ *   GET  /api/challenge/:id                                        -> dane wyzwania do wyświetlenia
+ *   POST /api/challenge/:id/answer {nick, score}                   -> odpowiedź anonimowa
  *
  * Prywatność: pełne e-maile żyją tylko w pliku danych na serwerze; API publiczne
  * zwraca wyłącznie maskę (pierwsze 3 + ostatnie 3 znaki, reszta '#').
  * Kody: ważne 10 minut, max 5 prób, limit 3 wysyłek / 15 min / email.
+ *
+ * Pojedynki: adres osoby wyzwanej NIE jest przechowywany — limit zaproszeń na
+ * adres liczony jest po nieodwracalnym skrócie z solą. Rekord wyzwania zawiera
+ * wyłącznie adres wyzywającego (już w rankingu za zgodą). Treść zaproszenia to
+ * sztywny szablon, a nick pochodzi z bazy, nie z żądania, więc serwera nie da
+ * się użyć jako przekaźnika dowolnych wiadomości.
+ * Limity: 5 zaproszeń / dobę / nadawcę, 2 / dobę / adres docelowy.
+ * Bilet: 60 minut, jednorazowy. Wyzwanie: 14 dni, jedna odpowiedź.
  */
 
 const express = require("express");
