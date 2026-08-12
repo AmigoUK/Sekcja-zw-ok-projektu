@@ -42,7 +42,11 @@ GAME_URL="https://twoja-domena/sekcja-zwlok.html" CHALLENGE_SALT="losowy-ciag" \
 PORT=3001 npm start
 ```
 
-Bez zmiennych SMTP serwer działa w trybie deweloperskim: treść maili i gotowe linki lądują na konsoli zamiast w skrzynkach. Pozwala to przejść cały przepływ lokalnie, łącznie z pojedynkiem, bez wysyłania czegokolwiek. Plik `ranking-data.json` powstaje obok serwera i jest celowo wykluczony z repozytorium — zawiera pełne adresy e-mail graczy.
+Bez zmiennych SMTP serwer działa w trybie deweloperskim: treść maili i gotowe linki lądują na konsoli zamiast w skrzynkach. Pozwala to przejść cały przepływ lokalnie, łącznie z pojedynkiem, bez wysyłania czegokolwiek.
+
+Dane trzyma SQLite (`node:sqlite` — wbudowany w Node 22+, bez zależności natywnych) w pliku `ranking.db` obok serwera. Plik jest celowo wykluczony z repozytorium: zawiera pełne adresy e-mail graczy. Kody autoryzacyjne, bilety i liczniki limitów też siedzą w bazie, więc **restart serwera nie kasuje aktywnych kodów ani nie resetuje ochrony przed spamem**.
+
+Jeśli obok serwera leży `ranking-data.json` z poprzedniej wersji, przy pierwszym starcie zostaje przepisany do bazy i zmieniony na `ranking-data.json.migrated`. Operacja jest jednorazowa (warunek: pusta baza) i nieniszcząca — oryginał zostaje na dysku.
 
 | Zmienna | Rola |
 |---|---|
@@ -50,7 +54,8 @@ Bez zmiennych SMTP serwer działa w trybie deweloperskim: treść maili i gotowe
 | `GAME_URL` | Adres, pod którym stoi gra — potrzebny do zbudowania linku w zaproszeniu. **Brak wyłącza pojedynki.** |
 | `CHALLENGE_SALT` | Sól do skrótów adresów przy limitowaniu zaproszeń. Brak = losowa przy starcie (limity resetują się po restarcie). |
 | `CORS_ORIGIN` | Ograniczenie źródła żądań. Domyślnie `*`. |
-| `DATA_FILE` | Ścieżka pliku danych. Używane przez testy, żeby nie dotykać prawdziwego rankingu. |
+| `DB_FILE` | Ścieżka bazy SQLite. Domyślnie `ranking.db` obok skryptu. |
+| `DATA_FILE` | Ścieżka starego pliku JSON do jednorazowej migracji. Domyślnie `ranking-data.json`. |
 
 ## Emocje rozmówców
 

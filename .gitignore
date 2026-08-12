@@ -10,3 +10,7 @@ node_modules/
 
 # baza rankingu: zawiera pełne adresy e-mail graczy, nigdy nie trafia do repo
 ranking-data.json
+ranking-data.json.migrated
+ranking.db
+ranking.db-wal
+ranking.db-shm

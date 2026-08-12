@@ -10,15 +10,19 @@ const fs = require("node:fs");
 const os = require("node:os");
 const path = require("node:path");
 
-const TMP_DB = path.join(os.tmpdir(), `ranking-test-${process.pid}.json`);
-process.env.DATA_FILE = TMP_DB;
+const TMP_DB = path.join(os.tmpdir(), `ranking-test-${process.pid}.db`);
+process.env.DB_FILE = TMP_DB;
+process.env.DATA_FILE = path.join(os.tmpdir(), `nieistniejacy-${process.pid}.json`);
 process.env.GAME_URL = "http://localhost:9999/sekcja-zwlok.html";
 process.env.CHALLENGE_SALT = "sol-testowa";
 delete process.env.SMTP_HOST;                 // tryb DEV: maile lecą na konsolę
 
 const srv = require("../ranking-server.js");
 
-test.after(() => { try { fs.unlinkSync(TMP_DB); } catch (_) {} });
+test.after(() => {
+  for (const f of [TMP_DB, TMP_DB + "-wal", TMP_DB + "-shm"])
+    try { fs.unlinkSync(f); } catch (_) {}
+});
 
 // ---------- serwer HTTP na efemerycznym porcie ----------
 let base;
