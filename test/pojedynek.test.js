@@ -114,8 +114,11 @@ test("pełny pojedynek: wyzwanie, odczyt, odpowiedź, rozstrzygnięcie", async (
   assert.ok(!JSON.stringify(view.body).includes("@"), "endpoint nie może ujawniać adresu wyzywającego");
 
   const ans = await captureLog(() => post(`/api/challenge/${id}/answer`, { nick: "Anna", score: 91 }));
-  assert.match(ans, /pobił Twój wynik/, "powiadomienie mówi o pobiciu wyniku");
+  assert.match(ans, /Tw[óo]j wynik pobity/, "powiadomienie mówi o pobiciu wyniku");
   assert.match(ans, /wyzywajacy@example\.com/, "powiadomienie leci do wyzywającego");
+  // Polski czas przeszły jest rodzajowy — szablon nie może zgadywać rodzaju z nicku.
+  assert.doesNotMatch(ans, /\b(pobił|pobiła|zagrał|zagrała|zdobył|zdobyła)\b/,
+    "szablon musi używać form neutralnych rodzajowo");
 
   const again = await post(`/api/challenge/${id}/answer`, { nick: "Anna", score: 99 });
   assert.strictEqual(again.status, 409, "drugiej odpowiedzi nie przyjmujemy");

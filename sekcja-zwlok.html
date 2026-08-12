@@ -124,6 +124,12 @@
     align-items:center; gap:14px;}
   #scorebar.on{display:flex}
   #scorebar b{color:var(--amber); font-size:18px}
+  #duelBanner:empty{display:none}
+  #duelBanner{margin:0 0 18px; padding:13px 16px; border-radius:10px; font-size:14px;
+    background:var(--panel2); border:1px solid var(--amber-dim); line-height:1.55}
+  #duelBanner .duelttl{color:var(--amber); font-weight:700; font-size:15px; display:block; margin-bottom:3px}
+  #duelBanner.spent{border-color:var(--line)}
+  #duelBanner.spent .duelttl{color:var(--dim)}
   #inputbar{display:flex; gap:10px; padding:14px 7% 18px; border-top:1px solid var(--line); background:var(--panel);}
   #inputbar textarea{
     flex:1; resize:none; background:var(--bg); border:1px solid var(--line); border-radius:10px;
@@ -188,6 +194,7 @@
 <!-- ================= SETUP ================= -->
 <div id="setup">
   <div class="card">
+    <div id="duelBanner"></div>
     <h2>Akta sprawy: Projekt FENIKS</h2>
     <p class="lead">
       Wdrożenie ERP dla firmy Logistra upadło po 14 miesiącach i 2,1 mln zł.
@@ -263,6 +270,7 @@
     <div class="typing" id="typing">…zbieram zeznania</div>
     <div id="scorebar">
       <span>Wynik śledztwa: <b id="scoreval">—</b>/100</span>
+      <button class="ghost" id="answerDuelBtn" style="display:none">⚔️ Odpowiedz na wyzwanie</button>
       <button class="ghost" id="saveScoreBtn">🏆 Zapisz w rankingu</button>
     </div>
     <div id="phasehint">Wybierz rozmówcę z listy po lewej, a potem zadawaj pytania.</div>
@@ -427,6 +435,8 @@ Prowadź całość po polsku. Zacznij dopiero po komendzie START.
       {nick:"RCA_Master", email:"rca#########.io", score:61, scenario:"FENIKS"},
     ],
     demoCode:null, demoEmail:null,
+    challenge:null,          // {id, nick, score, scenario} — kontekst pojedynku, gdy wejście przez link ?w=
+    duelDone:false,          // czy odpowiedź na wyzwanie została już wysłana w tej rozgrywce
   };
 
   // ====== SANITYZACJA WEJŚĆ I TŁUMACZENIE BŁĘDÓW ======
@@ -541,7 +551,9 @@ Prowadź całość po polsku. Zacznij dopiero po komendzie START.
       if(state.phase === "debrief"){
         const sm = reply.match(/WYNIK:\s*(\d{1,3})\s*\/\s*100/);
         if(sm){ state.score = Math.min(100, parseInt(sm[1],10));
-          $("scoreval").textContent = state.score; $("scorebar").classList.add("on"); }
+          $("scoreval").textContent = state.score; $("scorebar").classList.add("on");
+          if(state.challenge && !state.duelDone) $("answerDuelBtn").style.display = "";
+        }
       }
     }catch(e){
       addMsg("event", null, "⚠️ Błąd: " + friendlyError(e));
@@ -772,11 +784,17 @@ Prowadź całość po polsku. Zacznij dopiero po komendzie START.
     <p>1. Udział w rankingu jest dobrowolny i wymaga podania nicka oraz adresu e-mail, potwierdzonego jednorazowym kodem autoryzacyjnym wysyłanym na ten adres.</p>
     <p>2. W publicznym rankingu adres e-mail prezentowany jest wyłącznie w formie zamaskowanej (pierwsze 3 i ostatnie 3 znaki; pozostałe zastąpione znakiem „#").</p>
     <p>3. Operator może usunąć z rankingu wpisy zawierające nicki wulgarne, obraźliwe lub wprowadzające w błąd, a także wyniki uzyskane w sposób nieuczciwy.</p>
-    <p>4. Użytkownik może w każdej chwili zażądać usunięcia swojego wpisu z rankingu (kontakt: §5).</p>
-    <h4>§4. Odpowiedzialność</h4>
+    <p>4. Użytkownik może w każdej chwili zażądać usunięcia swojego wpisu z rankingu (kontakt: §6).</p>
+    <h4>§4. Pojedynki</h4>
+    <p>1. Użytkownik, który zapisał wynik w rankingu, może wysłać zaproszenie do pojedynku na wskazany przez siebie adres e-mail.</p>
+    <p>2. Wysyłając zaproszenie, użytkownik oświadcza, że zna adresata i ma podstawy sądzić, iż chce on otrzymać tę wiadomość. Odpowiedzialność za wskazanie adresu ponosi użytkownik.</p>
+    <p>3. Treść zaproszenia jest stałym szablonem — użytkownik nie ma możliwości dodania własnej wiadomości. W treści pojawia się wyłącznie jego nick z rankingu, wynik i nazwa scenariusza.</p>
+    <p>4. Adres adresata jest wykorzystywany jednorazowo do doręczenia zaproszenia i nie jest przechowywany. Obowiązują limity: 5 zaproszeń na dobę od jednego użytkownika i 2 zaproszenia na dobę na jeden adres.</p>
+    <p>5. Operator może wyłączyć funkcję pojedynków lub zablokować użytkownika nadużywającego zaproszeń.</p>
+    <h4>§5. Odpowiedzialność</h4>
     <p>1. Gra jest udostępniana „tak jak jest" (as is), bez gwarancji nieprzerwanego działania.</p>
     <p>2. Operator nie ponosi odpowiedzialności za przerwy w działaniu API dostawców zewnętrznych ani za decyzje podjęte na podstawie treści Gry.</p>
-    <h4>§5. Kontakt i zmiany regulaminu</h4>
+    <h4>§6. Kontakt i zmiany regulaminu</h4>
     <p>1. Kontakt z Operatorem: [adres e-mail — uzupełnij].</p>
     <p>2. Operator może zmienić regulamin; zmiany obowiązują od chwili publikacji w Grze.</p>
     <p class="muted">Wersja: 1.0. Ten dokument jest szablonem przygotowanym na potrzeby projektu edukacyjnego — przed komercyjnym użyciem skonsultuj go z prawnikiem.</p>`;
@@ -789,11 +807,12 @@ Prowadź całość po polsku. Zacznij dopiero po komendzie START.
       <li><b>Nick, adres e-mail, wynik gry, nazwa scenariusza, data</b> — wyłącznie jeśli dobrowolnie zapiszesz wynik w rankingu. Podstawa: zgoda (art. 6 ust. 1 lit. a RODO). Cel: prowadzenie rankingu i weryfikacja, że adres należy do Ciebie (jednorazowy kod autoryzacyjny).</li>
       <li><b>Klucz API</b> — NIE jest przesyłany do administratora ani zapisywany; pozostaje w pamięci przeglądarki i jest używany wyłącznie do bezpośredniej komunikacji z wybranym przez Ciebie dostawcą modelu.</li>
       <li><b>Treść rozgrywki</b> — trafia bezpośrednio do wybranego przez Ciebie dostawcy modelu (np. Anthropic, OpenAI, Zhipu AI) lub pozostaje na Twoim komputerze (silniki lokalne). Administrator rankingu nie otrzymuje treści rozmów.</li>
+      <li><b>Adres e-mail osoby, którą wyzywasz na pojedynek</b> — wykorzystywany <b>jednorazowo</b>, wyłącznie w celu doręczenia zaproszenia, i <b>nieprzechowywany</b>: nie trafia do bazy ani do żadnej listy. Aby ograniczyć liczbę wiadomości na jeden adres, zapamiętujemy przez 24 godziny wyłącznie jego nieodwracalny skrót kryptograficzny z solą — z zapisu nie da się odtworzyć adresu. Treść zaproszenia jest sztywnym szablonem: jedyne zmienne to Twój nick z rankingu, wynik i nazwa scenariusza; nie ma pola na dowolny tekst. Podstawa: prawnie uzasadniony interes polegający na umożliwieniu kontaktu między znajomymi (art. 6 ust. 1 lit. f RODO), przy czym to Ty oświadczasz, że masz podstawy sądzić, iż adresat chce otrzymać tę wiadomość.</li>
     </ul>
     <h4>3. Publikacja w rankingu</h4>
     <p>W publicznym rankingu widoczny jest nick oraz adres e-mail w formie zamaskowanej: pierwsze 3 i ostatnie 3 znaki, pozostałe zastąpione „#" (np. <span class="mono">jan############.com</span>). Pełny adres przechowywany jest wyłącznie w bazie rankingu i nie jest nikomu udostępniany.</p>
     <h4>4. Okres przechowywania</h4>
-    <p>Dane rankingu przechowujemy do czasu wycofania zgody (żądania usunięcia wpisu) lub zakończenia działania rankingu. Kody autoryzacyjne wygasają po 10 minutach i są usuwane.</p>
+    <p>Dane rankingu przechowujemy do czasu wycofania zgody (żądania usunięcia wpisu) lub zakończenia działania rankingu. Kody autoryzacyjne wygasają po 10 minutach i są usuwane. Wyzwania wygasają po 14 dniach; przechowywany rekord pojedynku zawiera adres e-mail <b>wyzywającego</b> (który zapisał wynik w rankingu za zgodą) — nigdy adres osoby wyzwanej.</p>
     <h4>5. Odbiorcy danych</h4>
     <p>Dostawca infrastruktury serwerowej i poczty e-mail (wysyłka kodów) — jako podmioty przetwarzające. Treści rozgrywki: wybrany przez Ciebie dostawca modelu językowego, zgodnie z jego własną polityką prywatności.</p>
     <h4>6. Twoje prawa</h4>
@@ -836,7 +855,12 @@ Prowadź całość po polsku. Zacznij dopiero po komendzie START.
       if(payload.code !== state.demoCode || payload.email !== state.demoEmail)
         return Promise.reject(new Error("Nieprawidłowy kod autoryzacyjny."));
       state.demoRank.push({nick:payload.nick, email:maskEmail(payload.email), score:payload.score, scenario:payload.scenario});
-      return Promise.resolve({ok:true});
+      // Brak biletu = brak kroku z wyzwaniem. Pojedynku nie da się udawać lokalnie,
+      // bo jego istotą jest wysłanie maila do innego człowieka.
+      return Promise.resolve({ok:true, challengeTicket:null, duel:null});
+    }
+    if(path.startsWith("/api/challenge")){
+      return Promise.reject(new Error("Pojedynki wymagają uruchomionego serwera rankingu."));
     }
     return Promise.reject(new Error("Nieznana ścieżka."));
   }
@@ -892,12 +916,128 @@ Prowadź całość po polsku. Zacznij dopiero po komendzie START.
       const nick = $("rNick").value.trim(), email = $("rEmail").value.trim(), code = $("rCode").value.trim();
       $("rConfirm").disabled = true;
       try{
-        await api("/api/submit-score", {email, nick, code, score:state.score, scenario:SCENARIO});
-        $("rMsg2").innerHTML = "<p class='okmsg'>Wynik zapisany! 🎉</p>";
-        setTimeout(showLeaderboard, 900);
+        const payload = {email, nick, code, score:state.score, scenario:SCENARIO};
+        // Wejście przez link wyzwania: ten sam zapis wyniku rozstrzyga pojedynek.
+        if(state.challenge && !state.duelDone) payload.challengeId = state.challenge.id;
+        const r = await api("/api/submit-score", payload);
+        let msg = "<p class='okmsg'>Wynik zapisany! 🎉</p>";
+        if(r.duel){ markDuelAnswered(r.duel, nick); msg += duelResultHtml(r.duel, nick); }
+        $("rMsg2").innerHTML = msg;
+        if(r.challengeTicket) showChallengeForm(r.challengeTicket);
+        else setTimeout(showLeaderboard, 900);
       }catch(e){ $("rMsg2").innerHTML = `<p class='errmsg'>${escapeHtml(e.message)}</p>`; $("rConfirm").disabled = false; }
     });
   });
+
+  // ====== POJEDYNEK ======
+  // Reguła nadrzędna: nic tutaj nie może zablokować grania. Wygasły link,
+  // nieznany identyfikator czy martwy backend kończą się zwykłym startem gry.
+
+  // Formy neutralne rodzajowo — nick nie mówi nic o tym, kim jest gracz.
+  function duelResultHtml(duel, myNick){
+    return duel.beat
+      ? `<p class='okmsg'>⚔️ Wynik pobity — ${escapeHtml(duel.challenger)}: ${duel.target}/100, Ty: ${state.score}/100. Powiadomienie poszło.</p>`
+      : `<p class='muted'>⚔️ Rekord gracza ${escapeHtml(duel.challenger)} (${duel.target}/100) się obronił. Powiadomienie poszło.</p>`;
+  }
+  function markDuelAnswered(duel, myNick){
+    state.duelDone = true;
+    $("answerDuelBtn").style.display = "none";
+    $("duelBanner").className = "spent";
+    $("duelBanner").innerHTML = `<span class="duelttl">⚔️ Pojedynek rozstrzygnięty</span>
+      ${escapeHtml(myNick)}: ${state.score}/100 · ${escapeHtml(duel.challenger)}: ${duel.target}/100`;
+  }
+
+  async function initChallenge(){
+    const id = new URLSearchParams(location.search).get("w");
+    if(!id || !/^[0-9a-f]{32}$/.test(id)) return;
+    if(!RANKING_API){
+      $("duelBanner").className = "spent";
+      $("duelBanner").innerHTML = `<span class="duelttl">⚔️ Wyzwanie</span>
+        Ta gra działa bez serwera rankingu, więc nie odczytam wyzwania. Zagrać oczywiście możesz.`;
+      return;
+    }
+    try{
+      const c = await api("/api/challenge/" + id);
+      if(c.status === "open"){
+        state.challenge = {id, nick:c.nick, score:c.score, scenario:c.scenario};
+        $("duelBanner").className = "";
+        $("duelBanner").innerHTML = `<span class="duelttl">⚔️ ${escapeHtml(c.nick)} rzuca Ci wyzwanie</span>
+          Wynik do pobicia: <b>${c.score}/100</b> w sprawie ${escapeHtml(c.scenario)}.
+          Po debriefie odpowiesz jednym kliknięciem.`;
+      } else if(c.status === "answered"){
+        $("duelBanner").className = "spent";
+        $("duelBanner").innerHTML = `<span class="duelttl">⚔️ Ten pojedynek jest już rozstrzygnięty</span>
+          ${escapeHtml(c.answer.nick)} odpowiedział wynikiem ${c.answer.score}/100 na ${c.score}/100
+          gracza ${escapeHtml(c.nick)}. Możesz zagrać normalnie.`;
+      } else {
+        $("duelBanner").className = "spent";
+        $("duelBanner").innerHTML = `<span class="duelttl">⚔️ To wyzwanie wygasło</span>
+          Linki do pojedynków są ważne 14 dni. Zagraj normalnie i rzuć własne wyzwanie.`;
+      }
+    }catch(e){
+      $("duelBanner").className = "spent";
+      $("duelBanner").innerHTML = `<span class="duelttl">⚔️ Nie udało się odczytać wyzwania</span>
+        ${escapeHtml(e.message)} — gra działa normalnie.`;
+    }
+  }
+
+  // Trzeci ekran modalu zapisu: rzucenie wyzwania na bilecie z submit-score.
+  function showChallengeForm(ticket){
+    setTimeout(() => {
+      openModal("Wyzwij znajomego", `
+        <p>Twój wynik <b style="color:var(--amber)">${state.score}/100</b> jest w rankingu.
+        Wyślij komuś wyzwanie, żeby spróbował go pobić.</p>
+        <div class="fldrow"><input id="cName" maxlength="40" placeholder="Imię osoby, którą wyzywasz"></div>
+        <div class="fldrow"><input id="cEmail" type="email" placeholder="Jej adres e-mail"></div>
+        <label class="cbx"><input type="checkbox" id="cAccept"> Znam tę osobę i mam podstawy sądzić,
+          że chce dostać ode mnie tę wiadomość. Jej adres zostanie użyty jednorazowo do doręczenia
+          zaproszenia i nie będzie nigdzie zapisany.</label>
+        <button class="primary" id="cSend">Wyślij wyzwanie</button>
+        <button class="ghost" id="cSkip" style="margin-top:8px">Pomiń — pokaż ranking</button>
+        <div id="cMsg"></div>`);
+      $("cSkip").addEventListener("click", showLeaderboard);
+      $("cSend").addEventListener("click", async () => {
+        const targetName = $("cName").value.trim(), targetEmail = $("cEmail").value.trim();
+        if(targetName.length < 2){ $("cMsg").innerHTML = "<p class='errmsg'>Podaj imię osoby.</p>"; return; }
+        if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(targetEmail)){ $("cMsg").innerHTML = "<p class='errmsg'>Podaj poprawny adres e-mail.</p>"; return; }
+        if(!$("cAccept").checked){ $("cMsg").innerHTML = "<p class='errmsg'>Wymagane potwierdzenie oświadczenia.</p>"; return; }
+        $("cSend").disabled = true;
+        try{
+          await api("/api/challenge", {ticket, targetName, targetEmail});
+          $("cMsg").innerHTML = `<p class='okmsg'>Wyzwanie poszło do ${escapeHtml(targetName)}. 🎯</p>`;
+          setTimeout(showLeaderboard, 1400);
+        }catch(e){ $("cMsg").innerHTML = `<p class='errmsg'>${escapeHtml(e.message)}</p>`; $("cSend").disabled = false; }
+      });
+    }, 700);
+  }
+
+  // Odpowiedź anonimowa — bez maila i bez kodu. Druga droga (z weryfikacją)
+  // przechodzi zwykłym zapisem wyniku, który niesie challengeId.
+  $("answerDuelBtn").addEventListener("click", () => {
+    if(!state.challenge || state.duelDone || state.score == null) return;
+    const c = state.challenge;
+    openModal("Odpowiedz na wyzwanie", `
+      <p>${escapeHtml(c.nick)} zdobył <b style="color:var(--amber)">${c.score}/100</b>.
+      Twój wynik: <b style="color:var(--amber)">${state.score}/100</b>.</p>
+      <div class="fldrow"><input id="dNick" maxlength="20" placeholder="Twój nick" value="${escapeHtml(state.nick || "")}"></div>
+      <button class="primary" id="dSend">Wyślij odpowiedź</button>
+      <p class="muted" style="margin-top:12px">Sama odpowiedź nie wymaga podawania adresu e-mail.
+      Jeśli chcesz przy okazji trafić do rankingu ogólnego, zamknij to okno i użyj
+      „🏆 Zapisz w rankingu" — pojedynek rozstrzygnie się tak samo.</p>
+      <div id="dMsg"></div>`);
+    $("dSend").addEventListener("click", async () => {
+      const nick = $("dNick").value.trim();
+      if(nick.length < 3){ $("dMsg").innerHTML = "<p class='errmsg'>Nick: minimum 3 znaki.</p>"; return; }
+      $("dSend").disabled = true;
+      try{
+        const r = await api(`/api/challenge/${c.id}/answer`, {nick, score:state.score});
+        markDuelAnswered(r, nick);
+        $("dMsg").innerHTML = duelResultHtml(r, nick);
+      }catch(e){ $("dMsg").innerHTML = `<p class='errmsg'>${escapeHtml(e.message)}</p>`; $("dSend").disabled = false; }
+    });
+  });
+
+  initChallenge();
 })();
 </script>
 </body>

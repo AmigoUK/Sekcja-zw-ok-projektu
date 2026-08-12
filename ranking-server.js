@@ -133,13 +133,15 @@ async function resolveChallenge(c, nick, score, verified) {
   c.answer = { nick, score, date: new Date().toISOString(), verified };
   saveDb();
   const beat = score > c.score;
+  // Formy neutralne rodzajowo: polski czas przeszły odmienia się przez rodzaj,
+  // a nick nie mówi nic o tym, kim jest gracz.
   await sendMail(
     c.challengerEmail,
-    beat ? `${nick} pobił Twój wynik!` : `${nick} odpowiedział na Twoje wyzwanie`,
+    beat ? `Twój wynik pobity — ${nick}: ${score}/100` : `${nick} odpowiada na Twoje wyzwanie`,
     `Cześć ${c.challengerNick}!\n\n` +
-    `${nick} zagrał w sprawę ${c.scenario} i zdobył ${score}/100.\n` +
+    `Sprawa ${c.scenario} — wynik gracza ${nick}: ${score}/100.\n` +
     `Twój wynik: ${c.score}/100.\n\n` +
-    (beat ? "Wyzwanie przyjęte i wygrane — rewanż należy do Ciebie.\n"
+    (beat ? "Wyzwanie przyjęte i wygrane. Rewanż należy do Ciebie.\n"
           : "Twój rekord się obronił.\n") +
     `\nTo jedyna wiadomość w sprawie tego pojedynku.\n`
   );
@@ -152,7 +154,7 @@ function challengeMailText(targetName, challengerNick, score, scenario, link) {
     `symulatorze post-mortem, w którym przesłuchujesz świadków upadłego projektu.\n\n` +
     `Wynik do pobicia: ${score}/100 (sprawa ${scenario}).\n\n` +
     `Podejmij wyzwanie: ${link}\n\n` +
-    `Twój adres podał(a) ${challengerNick} wyłącznie po to, żeby doręczyć to zaproszenie. ` +
+    `Twój adres wskazał gracz ${challengerNick} wyłącznie po to, żeby doręczyć to zaproszenie. ` +
     `Nie zapisaliśmy go i nie przyjdzie od nas żadna kolejna wiadomość. ` +
     `Jeśli to pomyłka — po prostu zignoruj tego maila.\n`;
 }
