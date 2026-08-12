@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+
+# zależności
+node_modules/
+
+# konfiguracja lokalna (SMTP_PASS itp. — patrz nagłówek ranking-server.js)
+.env
+.env.*
+
+# baza rankingu: zawiera pełne adresy e-mail graczy, nigdy nie trafia do repo
+ranking-data.json
