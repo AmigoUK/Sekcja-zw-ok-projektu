@@ -225,7 +225,10 @@
     <div class="field" id="keyField">
       <label>Klucz API</label>
       <input id="apikey" type="password" placeholder="sk-..." spellcheck="false">
-      <div class="note">Klucz pozostaje wyłącznie w pamięci tej strony i jest wysyłany bezpośrednio do wybranego dostawcy API. Nigdzie go nie zapisujemy.</div>
+      <label class="cbx" style="margin:8px 0 4px"><input type="checkbox" id="rememberKey">
+        Zapamiętaj klucz w tej karcie — przetrwa odświeżenie strony, zniknie po jej zamknięciu.
+        Nie zaznaczaj na cudzym komputerze.</label>
+      <div class="note">Klucz jest wysyłany bezpośrednio do wybranego dostawcy API i nigdy nie trafia do nas. Domyślnie żyje wyłącznie w pamięci strony; po zaznaczeniu opcji powyżej zostaje dodatkowo zapisany w pamięci sesyjnej tej karty przeglądarki.</div>
     </div>
     <div class="field">
       <button class="ghost" id="testBtn" style="width:100%">🔑 Testuj klucz i pobierz dostępne modele</button>
@@ -778,7 +781,7 @@ Prowadź całość po polsku. Zacznij dopiero po komendzie START.
     <p>3. Gra ma charakter edukacyjno-rozrywkowy. Wszystkie postacie, firmy i zdarzenia w scenariuszach są fikcyjne, a podobieństwo do rzeczywistych osób lub podmiotów jest przypadkowe.</p>
     <h4>§2. Zasady działania Gry</h4>
     <p>1. Gra działa w przeglądarce użytkownika i komunikuje się bezpośrednio z wybranym przez użytkownika dostawcą modelu językowego (API chmurowe lub serwer lokalny).</p>
-    <p>2. Użytkownik korzysta z własnego klucza API. Klucz nie jest przesyłany do Operatora ani nigdzie zapisywany — pozostaje w pamięci strony do jej zamknięcia.</p>
+    <p>2. Użytkownik korzysta z własnego klucza API. Klucz nie jest przesyłany do Operatora — pozostaje w przeglądarce użytkownika. Domyślnie żyje w pamięci strony do jej zamknięcia; opcjonalnie, po wyraźnym zaznaczeniu przez użytkownika, jest zapisywany w pamięci sesyjnej karty i usuwany wraz z jej zamknięciem.</p>
     <p>3. Koszty użycia API dostawcy modelu ponosi użytkownik zgodnie z cennikiem tego dostawcy. Operator nie odpowiada za treści generowane przez modele językowe.</p>
     <h4>§3. Ranking</h4>
     <p>1. Udział w rankingu jest dobrowolny i wymaga podania nicka oraz adresu e-mail, potwierdzonego jednorazowym kodem autoryzacyjnym wysyłanym na ten adres.</p>
@@ -805,7 +808,7 @@ Prowadź całość po polsku. Zacznij dopiero po komendzie START.
     <h4>2. Jakie dane przetwarzamy i po co</h4>
     <ul>
       <li><b>Nick, adres e-mail, wynik gry, nazwa scenariusza, data</b> — wyłącznie jeśli dobrowolnie zapiszesz wynik w rankingu. Podstawa: zgoda (art. 6 ust. 1 lit. a RODO). Cel: prowadzenie rankingu i weryfikacja, że adres należy do Ciebie (jednorazowy kod autoryzacyjny).</li>
-      <li><b>Klucz API</b> — NIE jest przesyłany do administratora ani zapisywany; pozostaje w pamięci przeglądarki i jest używany wyłącznie do bezpośredniej komunikacji z wybranym przez Ciebie dostawcą modelu.</li>
+      <li><b>Klucz API</b> — NIE jest przesyłany do administratora; pozostaje w Twojej przeglądarce i służy wyłącznie do bezpośredniej komunikacji z wybranym przez Ciebie dostawcą modelu. Domyślnie żyje tylko w pamięci otwartej strony. Jeśli zaznaczysz opcję „Zapamiętaj klucz w tej karcie", zostaje zapisany w pamięci sesyjnej przeglądarki (<span class="mono">sessionStorage</span>) — przetrwa odświeżenie strony i zniknie po zamknięciu karty. Zapis następuje wyłącznie na Twoim urządzeniu i tylko po zaznaczeniu tej opcji; odznaczenie kasuje go natychmiast.</li>
       <li><b>Treść rozgrywki</b> — trafia bezpośrednio do wybranego przez Ciebie dostawcy modelu (np. Anthropic, OpenAI, Zhipu AI) lub pozostaje na Twoim komputerze (silniki lokalne). Administrator rankingu nie otrzymuje treści rozmów.</li>
       <li><b>Adres e-mail osoby, którą wyzywasz na pojedynek</b> — wykorzystywany <b>jednorazowo</b>, wyłącznie w celu doręczenia zaproszenia, i <b>nieprzechowywany</b>: nie trafia do bazy ani do żadnej listy. Aby ograniczyć liczbę wiadomości na jeden adres, zapamiętujemy przez 24 godziny wyłącznie jego nieodwracalny skrót kryptograficzny z solą — z zapisu nie da się odtworzyć adresu. Treść zaproszenia jest sztywnym szablonem: jedyne zmienne to Twój nick z rankingu, wynik i nazwa scenariusza; nie ma pola na dowolny tekst. Podstawa: prawnie uzasadniony interes polegający na umożliwieniu kontaktu między znajomymi (art. 6 ust. 1 lit. f RODO), przy czym to Ty oświadczasz, że masz podstawy sądzić, iż adresat chce otrzymać tę wiadomość.</li>
     </ul>
@@ -927,6 +930,27 @@ Prowadź całość po polsku. Zacznij dopiero po komendzie START.
         else setTimeout(showLeaderboard, 900);
       }catch(e){ $("rMsg2").innerHTML = `<p class='errmsg'>${escapeHtml(e.message)}</p>`; $("rConfirm").disabled = false; }
     });
+  });
+
+  // ====== PAMIĘĆ KLUCZA ======
+  // sessionStorage, nie localStorage: klucz przeżywa odświeżenie, ale ginie razem
+  // z kartą. Na cudzym laptopie nie zostaje nic po zamknięciu przeglądarki.
+  const KEY_STORE = "sekcja-zwlok:apikey";
+  function readStoredKey(){
+    try{ return sessionStorage.getItem(KEY_STORE) || ""; }catch(_){ return ""; }
+  }
+  function writeStoredKey(v){
+    try{ v ? sessionStorage.setItem(KEY_STORE, v) : sessionStorage.removeItem(KEY_STORE); }catch(_){}
+  }
+  (function restoreKey(){
+    const k = readStoredKey();
+    if(k){ $("apikey").value = k; $("rememberKey").checked = true; }
+  })();
+  $("rememberKey").addEventListener("change", e => {
+    writeStoredKey(e.target.checked ? cleanInput($("apikey").value) : "");
+  });
+  $("apikey").addEventListener("input", () => {
+    if($("rememberKey").checked) writeStoredKey(cleanInput($("apikey").value));
   });
 
   // ====== POJEDYNEK ======
