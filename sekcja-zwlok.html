@@ -112,6 +112,15 @@
   .msg.ai{align-self:flex-start}
   .msg.ai .bubble{background:var(--panel); border:1px solid var(--line);}
   .msg.ai .who b{color:var(--amber)}
+  /* Portret emocji przy wypowiedzi — zamrożony w chwili, gdy padła. */
+  .msg.ai.zemocja{display:grid; grid-template-columns:52px 1fr; gap:12px; align-items:start}
+  .msg.ai.zemocja .emo{grid-row:1 / span 2; width:52px; height:52px; border-radius:12px;
+    object-fit:cover; border:1px solid var(--line); margin-top:2px}
+  .msg.ai.zemocja .who{margin-bottom:4px}
+  @media (max-width:720px){
+    .msg.ai.zemocja{grid-template-columns:40px 1fr; gap:9px}
+    .msg.ai.zemocja .emo{width:40px; height:40px; border-radius:10px}
+  }
   .msg.event{align-self:center; max-width:92%; font-size:12px; color:var(--dim);
     border:1px dashed var(--line); border-radius:20px; padding:5px 16px;}
   .msg .bubble h1,.msg .bubble h2,.msg .bubble h3{font-size:15px; margin:8px 0 4px; color:var(--amber)}
@@ -440,6 +449,7 @@ Prowadź całość po polsku. Zacznij dopiero po komendzie START.
     demoCode:null, demoEmail:null,
     challenge:null,          // {id, nick, score, scenario} — kontekst pojedynku, gdy wejście przez link ?w=
     duelDone:false,          // czy odpowiedź na wyzwanie została już wysłana w tej rozgrywce
+    emocje:null,             // stan napięcia per postać; inicjowany po zdefiniowaniu funkcji
   };
 
   // ====== SANITYZACJA WEJŚĆ I TŁUMACZENIE BŁĘDÓW ======
@@ -496,13 +506,110 @@ Prowadź całość po polsku. Zacznij dopiero po komendzie START.
       .replace(/(<li>[\s\S]*?<\/li>)(?!\s*<li>)/g,"<ul>$1</ul>");
     return h;
   }
-  function addMsg(kind, who, text){
+  function addMsg(kind, who, text, portret){
     const div = document.createElement("div");
-    div.className = "msg " + kind;
+    div.className = "msg " + kind + (portret ? " zemocja" : "");
     if(kind === "event"){ div.textContent = text; }
-    else { div.innerHTML = (who ? `<div class="who">${who}</div>` : "") + `<div class="bubble">${md(text)}</div>`; }
+    else {
+      div.innerHTML =
+        (portret ? `<img class="emo" src="${portret}" alt="" onerror="this.remove(); this.closest('.msg').classList.remove('zemocja')">` : "") +
+        (who ? `<div class="who">${who}</div>` : "") + `<div class="bubble">${md(text)}</div>`;
+    }
     chat.appendChild(div);
     chat.scrollTop = chat.scrollHeight;
+  }
+
+  // <emocje>
+  // Model napięcia przesłuchania. Klient nie wie, co w scenariuszu jest prawdą —
+  // wiedza o sprawie należy do modelu. Obserwujemy więc kształt przesłuchania:
+  // kogo gracz przyciska, jak długo, czy zestawia zeznania i ile czasu zostało.
+  // Funkcje są czyste i testowane osobno (patrz test/emocje.test.js).
+  const EMOCJE_PROGI = [0.30, 0.55, 0.80];
+  const EMOCJE_WAGI = { nacisk:0.22, konfrontacja:0.35, zegar:0.25, powrot:0.15, ostyganie:0.10 };
+  const EMOCJE_LUKA_POWROTU = 3;          // ile pytań musi minąć, by powrót się liczył
+
+  // Ta sama presja daje inną minę u każdego — mimika odbija strategię obronną postaci.
+  const EMOCJE_ARC = {
+    Marek: ["neutral", "smutek",  "zaskoczenie", "rezygnacja"],  // unika odpowiedzi
+    Beata: ["neutral", "radosc",  "zaskoczenie", "zlosc"],       // czaruje i zmienia temat
+    Tomek: ["neutral", "radosc",  "zlosc",       "rezygnacja"],  // zgorzkniały, „a nie mówiłem"
+    Iwona: ["neutral", "smutek",  "rezygnacja",  "zlosc"],       // zmęczona, lojalna
+  };
+  // Polski odmienia imiona, więc dopasowujemy rdzeń: „Tomka", „Beacie", „Iwonę".
+  // Dwie pułapki:
+  //  1. oboczność spółgłoskowa — Beata → Beacie (t przechodzi w c), sam rdzeń „beat" nie wystarczy;
+  //  2. \b w JS jest ASCII-only, więc po „ę" czy „ą" NIE ma granicy słowa i dopasowanie
+  //     cicho przepada. Stąd asercje (?<!\p{L}) / (?!\p{L}) z flagą u zamiast \b.
+  const EMOCJE_RDZENIE = {
+    Marek: /(?<!\p{L})mar(ek|ka|kowi|kiem|ku)(?!\p{L})/iu,
+    Beata: /(?<!\p{L})bea(t[ayęąo]|cie)(?!\p{L})/iu,
+    Tomek: /(?<!\p{L})tom(ek|ka|kowi|kiem|ku)(?!\p{L})/iu,
+    Iwona: /(?<!\p{L})iwon(a|y|ie|ę|ą|o)(?!\p{L})/iu,
+  };
+
+  function nowyStanEmocji(){
+    return { bazowe:{Marek:0, Beata:0, Tomek:0, Iwona:0}, ostatniIndeks:{}, ostatnia:null };
+  }
+
+  // Konfrontacja = gracz cytuje kogoś innego niż rozmówca („Tomek pisał do Ciebie…").
+  function wykryjKonfrontacje(tekst, biezaca){
+    return Object.entries(EMOCJE_RDZENIE)
+      .some(([imie, re]) => imie !== biezaca && re.test(String(tekst)));
+  }
+
+  function poPytaniu(stan, postac, tekst, nrPytania){
+    const konfrontacja = wykryjKonfrontacje(tekst, postac);
+    const bazowe = {...stan.bazowe};
+    for(const k of Object.keys(bazowe))                       // pozostali stygną
+      if(k !== postac) bazowe[k] = Math.max(0, bazowe[k] - EMOCJE_WAGI.ostyganie);
+
+    let przyrost = EMOCJE_WAGI.nacisk;
+    if(konfrontacja) przyrost += EMOCJE_WAGI.konfrontacja;
+    const poprzednioTu = stan.ostatniIndeks[postac];
+    if(stan.ostatnia !== postac && poprzednioTu != null && nrPytania - poprzednioTu >= EMOCJE_LUKA_POWROTU)
+      przyrost += EMOCJE_WAGI.powrot;                          // wie, że rozmawiałeś z innymi
+
+    if(postac in bazowe) bazowe[postac] = Math.min(1, bazowe[postac] + przyrost);
+    return {
+      stan: { bazowe, ostatniIndeks:{...stan.ostatniIndeks, [postac]:nrPytania}, ostatnia:postac },
+      konfrontacja,
+    };
+  }
+
+  // Zegar śledztwa dokłada się wszystkim na bieżąco, więc liczymy go przy odczycie.
+  function napiecieDla(stan, postac, nrPytania, maxQ){
+    const baza = stan.bazowe[postac] || 0;
+    return Math.min(1, baza + EMOCJE_WAGI.zegar * Math.min(1, nrPytania / maxQ));
+  }
+
+  function emocjaDla(postac, napiecie, konfrontacja){
+    const arc = EMOCJE_ARC[postac];
+    if(!arc) return "neutral";
+    if(konfrontacja) return "zaskoczenie";                     // przyłapanie przebija poziom napięcia
+    const i = EMOCJE_PROGI.findIndex(p => napiecie < p);
+    return arc[i === -1 ? arc.length - 1 : i];
+  }
+
+  function plikEmocji(postac, emocja){
+    const p = String(postac || "").toLowerCase();
+    if(!(postac in EMOCJE_ARC)) return null;
+    return emocja === "neutral" ? `img/${p}.png` : `img/emocje/${p}-${emocja}.jpg`;
+  }
+  // </emocje>
+
+  state.emocje = nowyStanEmocji();
+
+  // Avatar w panelu pokazuje stan bieżący; portret przy dymku zostaje zamrożony.
+  function ustawAvatar(postac, plik){
+    const av = document.querySelector(`.persona[data-name="${postac}"] .av`);
+    if(!av || !plik) return;
+    let img = av.querySelector("img");
+    if(!img){                                   // onerror mógł go wcześniej usunąć
+      img = document.createElement("img");
+      img.alt = ""; img.onerror = () => img.remove();
+      av.appendChild(img);
+    }
+    img.src = plik;
   }
   function setCounter(){
     $("qnum").textContent = state.questions;
@@ -544,13 +651,27 @@ Prowadź całość po polsku. Zacznij dopiero po komendzie START.
     if(opts.display === "user") addMsg("user", state.nick || "Facylitator", userText);
     if(opts.display === "event") addMsg("event", null, opts.eventText || userText);
     if(opts.count){ state.questions++; setCounter(); }
+    // Napięcie rośnie od pytania gracza, nie od odpowiedzi modelu.
+    let konfrontacja = false;
+    if(opts.count && state.persona){
+      const r = poPytaniu(state.emocje, state.persona, userText, state.questions);
+      state.emocje = r.stan; konfrontacja = r.konfrontacja;
+    }
     state.history.push({role:"user", content:userText});
     try{
       const reply = await callModel();
       state.history.push({role:"assistant", content:reply});
       const {name, text} = speakerLabel(reply);
       const who = name ? `<b>${name}</b>` : (state.phase === "debrief" ? "<b>Debrief</b>" : "Narrator");
-      addMsg("ai", who, text);
+
+      const mowca = (name in EMOCJE_ARC) ? name : (state.phase === "interview" ? state.persona : null);
+      let portret = null;
+      if(mowca){
+        const emocja = emocjaDla(mowca, napiecieDla(state.emocje, mowca, state.questions, MAX_Q), konfrontacja);
+        portret = plikEmocji(mowca, emocja);
+        ustawAvatar(mowca, portret);
+      }
+      addMsg("ai", who, text, portret);
       if(state.phase === "debrief"){
         const sm = reply.match(/WYNIK:\s*(\d{1,3})\s*\/\s*100/);
         if(sm){ state.score = Math.min(100, parseInt(sm[1],10));

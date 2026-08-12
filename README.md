@@ -22,7 +22,7 @@ Narracyjna gra edukacyjna: wcielasz się w facylitatora post-mortem i przesłuch
 | Ścieżka | Zawartość |
 |---|---|
 | `img/marek.png`, `beata.png`, `tomek.png`, `iwona.png` | Portrety czwórki przesłuchiwanych, 384×384. Gra podmienia nimi inicjały w panelu „Rozmówcy"; jeśli pliku brak, `onerror` cofa avatar do inicjałów. |
-| `img/emocje/<postać>-<emocja>.jpg` | 20 wariantów mimiki, 768×768. Emocje: `radosc`, `zlosc`, `zaskoczenie`, `smutek`, `rezygnacja`. Wariant neutralny to portret główny z wiersza wyżej. Materiał na kolejną wersję — obecna gra ich nie używa. |
+| `img/emocje/<postać>-<emocja>.jpg` | 20 wariantów mimiki, 768×768. Emocje: `radosc`, `zlosc`, `zaskoczenie`, `smutek`, `rezygnacja`. Wariant neutralny to portret główny z wiersza wyżej. Podmieniane w trakcie gry — patrz niżej. |
 | `img/okladka.jpg` | Okładka „FENIKS — gra śledcza", 2:3. |
 | `img/tlo-debriefu.jpg` | Ściana dowodów z czerwonymi sznurkami, 16:9. |
 
@@ -51,6 +51,25 @@ Bez zmiennych SMTP serwer działa w trybie deweloperskim: treść maili i gotowe
 | `CHALLENGE_SALT` | Sól do skrótów adresów przy limitowaniu zaproszeń. Brak = losowa przy starcie (limity resetują się po restarcie). |
 | `CORS_ORIGIN` | Ograniczenie źródła żądań. Domyślnie `*`. |
 | `DATA_FILE` | Ścieżka pliku danych. Używane przez testy, żeby nie dotykać prawdziwego rankingu. |
+
+## Emocje rozmówców
+
+Przy każdej wypowiedzi w czacie pojawia się portret pokazujący, w jakim stanie jest postać w tej chwili — a portret w panelu bocznym odzwierciedla stan bieżący. Emocja przy dymku zostaje **zamrożona**, więc przewijając rozmowę widać przebieg przesłuchania: moment, w którym ktoś przestał się uśmiechać.
+
+Emocji nie wybiera model. Wynika ona z **kształtu przesłuchania**, bo przeglądarka nie wie, co w scenariuszu jest prawdą — ta wiedza należy do modelu. Cztery obserwowalne sygnały składają się na napięcie liczone osobno dla każdej postaci:
+
+| Sygnał | Wpływ |
+|---|---|
+| Nacisk — kolejne pytania pod rząd do tej samej osoby | rośnie z każdym pytaniem |
+| Konfrontacja — w pytaniu pada imię innego rozmówcy | skok napięcia i wymuszone zaskoczenie na tę odpowiedź |
+| Zegar śledztwa — postęp do 25 pytań | podnosi napięcie wszystkim |
+| Powrót do porzuconego rozmówcy | dokłada, gdy wracasz po co najmniej dwóch pytaniach do innych |
+
+Pytanie zadane komu innemu pozwala postaci ostygnąć.
+
+Ta sama presja daje **inną minę u każdej postaci**, zależnie od jej strategii obronnej: Marek (unika) idzie w smutek → zaskoczenie → rezygnację, Beata (czaruje) w radość → zaskoczenie → złość, Tomek (zgorzkniały) w radość → złość → rezygnację, Iwona (zmęczona) w smutek → rezygnację → złość. Mimika jest więc informacją zwrotną o jakości pytań, a nie ozdobnikiem.
+
+Logika siedzi w bloku `// <emocje>` … `// </emocje>` w `sekcja-zwlok.html` — czyste funkcje bez DOM. Testy (`test/emocje.test.js`) wycinają ten blok z HTML-a i wykonują w izolacji, dzięki czemu gra zostaje jednym plikiem, a logika ma prawdziwe testy jednostkowe.
 
 ## Pojedynki
 
