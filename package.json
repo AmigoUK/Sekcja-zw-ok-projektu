@@ -18,11 +18,12 @@
   ],
   "scripts": {
     "start": "node ranking-server.js",
-    "deck": "node deck.js"
+    "deck": "node deck.js",
+    "test": "node --test test/*.test.js"
   },
   "dependencies": {
-    "express": "^4.19.2",
-    "nodemailer": "^6.9.13"
+    "express": "^4.22.2",
+    "nodemailer": "^9.0.5"
   },
   "devDependencies": {
     "pptxgenjs": "^3.12.0"
