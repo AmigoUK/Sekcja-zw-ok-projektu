@@ -182,3 +182,41 @@ test("repo: master prompt Custom GPT mieści się w limicie 8000 znaków", () =>
   const s = fs.readFileSync(path.join(GPT, "gpt-master-prompt.md"), "utf-8");
   assert.ok(s.length < 8000, `ma ${s.length} znaków`);
 });
+
+// ---------- budowanie ----------
+const B = require("../scripts/build-scenariusze.js");
+const HTML = fs.readFileSync(path.join(__dirname, "..", "sekcja-zwlok.html"), "utf-8");
+
+test("build: blok w HTML jest aktualny (uruchom npm run build)", () => {
+  const { lista, bledy } = B.wczytajKatalog();
+  assert.deepStrictEqual(bledy, []);
+  assert.ok(HTML.includes(B.zbudujBlok(lista, B.wczytajSilnik())),
+    "sekcja-zwlok.html ma nieaktualny blok // <scenariusze> — uruchom npm run build");
+});
+
+test("build: tekst z </script> nie zamknie tagu skryptu", () => {
+  const blok = B.zbudujBlok([{ meta: { id: "X" }, tlo: "", tresc: "zły </script> tekst" }], "silnik");
+  assert.ok(!blok.includes("</script>"));
+  assert.ok(blok.includes("<\\/script>"));
+});
+
+test("build: wstrzyknij podmienia tylko zawartość między znacznikami", () => {
+  const html = "a\n  // <scenariusze>\nstare\n  // </scenariusze>\nb";
+  assert.strictEqual(B.wstrzyknij(html, "// <scenariusze>\nnowe\n// </scenariusze>"),
+    "a\n  // <scenariusze>\nnowe\n// </scenariusze>\nb");
+});
+
+test("build: brak znaczników to błąd, nie cicha podmiana", () => {
+  assert.throws(() => B.wstrzyknij("bez znaczników", "x"), /znacznik/);
+});
+
+test("build: blok wykonuje się jako JS i zawiera FENIKSA z TŁEM", () => {
+  const { lista } = B.wczytajKatalog();
+  const vm = require("node:vm");
+  const ctx = vm.createContext({});
+  vm.runInContext(B.zbudujBlok(lista, B.wczytajSilnik()) + "\nglobalThis.W = {SILNIK, SCENARIUSZE};", ctx);
+  const feniks = ctx.W.SCENARIUSZE.find(s => s.meta.id === "FENIKS");
+  assert.ok(feniks.tlo.startsWith("Projekt FENIKS"));
+  assert.ok(!feniks.tresc.startsWith("---"));
+  assert.match(ctx.W.SILNIK, /WYNIK: X\/100/);
+});

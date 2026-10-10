@@ -18,6 +18,7 @@
   ],
   "scripts": {
     "start": "node ranking-server.js",
+    "build": "node scripts/build-scenariusze.js",
     "deck": "node deck.js",
     "test": "node --test test/*.test.js"
   },
