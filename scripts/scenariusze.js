@@ -6,7 +6,7 @@
  * nie chcemy dla kilkunastu linii metadanych.
  */
 const STRATEGIE = ["unika", "czaruje", "zgorzknialy", "zmeczony", "agresywny"];
-const DOMENY = ["projekty", "zywnosc", "rodo"];          // kolejność = kolejność na ekranie
+const DOMENY = ["projekty", "zywnosc", "rodo", "bhp"];          // kolejność = kolejność na ekranie
 const JURYSDYKCJE = ["PL", "UK", "UE"];
 // Formy imion, które są też zwykłymi słowami — dawałyby fałszywe konfrontacje
 // („Ani jednego dokumentu?"). Dopisujemy, gdy autor scenariusza trafi na kolejny przypadek.

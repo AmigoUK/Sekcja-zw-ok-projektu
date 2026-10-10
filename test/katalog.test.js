@@ -27,6 +27,15 @@ test("każda domena z walidatora ma etykietę w UI", () => {
   for (const d of DOMENY) assert.ok(K.DOMENY_UI[d], `brak DOMENY_UI.${d}`);
 });
 
+test("kolejność domen na ekranie = kolejność w walidatorze (sortowanie katalogu)", () => {
+  assert.deepStrictEqual(Object.keys(K.DOMENY_UI), [...DOMENY]);
+});
+
+test("domena bhp grupuje się po RODO", () => {
+  const g = K.grupujScenariusze([sp("REGAL", "bhp", 2), sp("WYCIEK", "rodo", 3)]);
+  assert.deepStrictEqual([...g.map(x => x.domena)], ["rodo", "bhp"]);
+});
+
 test("grupujScenariusze: kolejność domen, puste grupy pominięte", () => {
   const g = K.grupujScenariusze([sp("WYCIEK", "rodo", 3), sp("FENIKS", "projekty", 2)]);
   assert.deepStrictEqual([...g.map(x => x.domena)], ["projekty", "rodo"]);
