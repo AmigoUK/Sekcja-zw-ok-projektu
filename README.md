@@ -6,7 +6,7 @@ Narracyjna gra edukacyjna: wcielasz się w facylitatora post-mortem i przesłuch
 
 ## Struktura repozytorium
 
-- `sekcja-zwlok.html` — gra (jeden plik, zero backendu) z biblioteką 9 spraw w 3 domenach (projekty, bezpieczeństwo żywności, dane i RODO), wybieranych na ekranie startowym; scenariusze i silnik wstrzykuje do pliku `npm run build`. Obsługiwane silniki AI: Anthropic, OpenAI, GLM/Zhipu, DeepSeek, Groq (Llama) oraz lokalne: LM Studio, Ollama, llama.cpp i dowolny endpoint OpenAI-compatible. Ranking z autoryzacją mailową (tryb demo bez backendu), regulamin i polityka prywatności wbudowane.
+- `sekcja-zwlok.html` — gra (jeden plik, zero backendu) z biblioteką 15 spraw w 4 domenach (projekty, bezpieczeństwo żywności, dane i RODO, bezpieczeństwo pracy), wybieranych na ekranie startowym; scenariusze i silnik wstrzykuje do pliku `npm run build`. Obsługiwane silniki AI: Anthropic, OpenAI, GLM/Zhipu, DeepSeek, Groq (Llama) oraz lokalne: LM Studio, Ollama, llama.cpp i dowolny endpoint OpenAI-compatible. Ranking z autoryzacją mailową (tryb demo bez backendu), regulamin i polityka prywatności wbudowane.
 - `ranking-server.js` — backend rankingu i pojedynków (Node.js + express + nodemailer): kody na email, maskowanie adresów (3 pierwsze + 3 ostatnie znaki), leaderboard, wyzwania. Konfiguracja w komentarzu na górze pliku.
 - `test/` — testy `node:test` (bez zależności zewnętrznych): `npm test`.
 - `docs/superpowers/specs/` — zatwierdzone specyfikacje funkcji.
@@ -32,7 +32,7 @@ Grafiki w repozytorium są przeskalowane pod web. Oryginały 1254×1254 nie są 
 
 ## Scenariusze
 
-Gra ma bibliotekę spraw, pogrupowaną na ekranie startowym według domen: 📁 Projekty (BILBORD, FENIKS, BLACKOUT, NOVA, PRZEJĘCIE, KONSORCJUM), 🍽️ Bezpieczeństwo żywności (CHŁODNIA 🇵🇱, SEZAM 🇬🇧, LISTERIA 🇵🇱), 🔐 Dane i RODO (ROZSYŁKA 🇬🇧, WYCIEK 🇵🇱, KUPON 🇵🇱). Ostatni wybór pamięta `localStorage`, a link z wyzwaniem blokuje sprawę na tę z pojedynku.
+Gra ma bibliotekę spraw, pogrupowaną na ekranie startowym według domen: 📁 Projekty (BILBORD, FENIKS, BLACKOUT, NOVA, PRZEJĘCIE, KONSORCJUM), 🍽️ Bezpieczeństwo żywności (CHŁODNIA 🇵🇱, SEZAM 🇬🇧, LISTERIA 🇵🇱), 🔐 Dane i RODO (ROZSYŁKA 🇬🇧, WYCIEK 🇵🇱, KUPON 🇵🇱), 🦺 Bezpieczeństwo pracy (REGAŁ 🇵🇱, RUSZTOWANIE 🇬🇧, BLOKADA 🇵🇱). Ostatni wybór pamięta `localStorage`, a link z wyzwaniem blokuje sprawę na tę z pojedynku.
 
 Jak dodać sprawę:
 

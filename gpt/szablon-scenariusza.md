@@ -17,7 +17,7 @@ Wskazówki projektowe (sprawdzone w iteracjach):
 ---
 id: NAZWA
 tytul: "NAZWA — jedno zdanie o typie porażki"
-domena: projekty        # projekty | zywnosc | rodo
+domena: projekty        # projekty | zywnosc | rodo | bhp
 jurysdykcja: UE         # PL | UK | UE
 poziom: 2               # 1 wprowadzający … 5 ekspercki
 pytania: 25

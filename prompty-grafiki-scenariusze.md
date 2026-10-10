@@ -1,6 +1,6 @@
 # Grafiki do scenariuszy branżowych — lista plików i prompty
 
-Uzupełnienie [`prompty-grafiki.md`](prompty-grafiki.md): ten sam styl (polski komiks kryminalny lat 70.), te same uwagi techniczne per generator i ta sama zasada praw autorskich. Tu są postacie spraw branżowych (CHŁODNIA, SEZAM, WYCIEK, ROZSYŁKA, LISTERIA, KUPON), opcjonalne grafiki dla scenariuszy 02–06 i okładki spraw.
+Uzupełnienie [`prompty-grafiki.md`](prompty-grafiki.md): ten sam styl (polski komiks kryminalny lat 70.), te same uwagi techniczne per generator i ta sama zasada praw autorskich. Tu są postacie spraw branżowych (CHŁODNIA, SEZAM, WYCIEK, ROZSYŁKA, LISTERIA, KUPON, REGAŁ, RUSZTOWANIE, BLOKADA), opcjonalne grafiki dla scenariuszy 02–06 i okładki spraw.
 
 Gra działa bez żadnego z tych plików: brak portretu = inicjały na kolorze, brak wariantu emocji = dymek bez obrazka. Można więc dokładać grafiki stopniowo.
 
@@ -288,6 +288,124 @@ Wspólne tło serii: pizzeria i biuro software house'u w stylu lat 70. — piec 
 
 ---
 
+## REGAŁ 🇵🇱 — `img/regal/`
+
+Wspólne tło serii: hala magazynu wysokiego składowania w stylu lat 70. — rzędy pomarańczowo-niebieskich regałów, palety, wózki widłowe, żółte pasy na posadzce, sodowe lampy pod dachem.
+
+| Plik | Postać | Strategia | Akcent |
+|---|---|---|---|
+| `rafal.png` | Rafał Wierzbicki — dyrektor centrum dystrybucyjnego | `czaruje` | musztardowy |
+| `zofia.png` | Zofia Krawiec — specjalistka ds. BHP | `zmeczony` | morski |
+| `jacek.png` | Jacek Doliński — kierownik zmiany | `agresywny` | ceglasty |
+| `patryk.png` | Patryk Sowa — operator wózka wysokiego składowania | `zgorzknialy` | niebieski |
+
+### Rafał Wierzbicki — dyrektor centrum (czaruje)
+**EN:**
+> 1970s Polish crime comic style portrait of a slick 45-year-old warehouse director, tailored suit with a hi-vis vest worn open over it like a fashion accessory, confident salesman's smile, holding up a bar chart of rising productivity, towering pallet racks behind him, mustard yellow accent, [baza stylu]
+
+**PL:** gładki 45-letni dyrektor magazynu, dopasowany garnitur z kamizelką odblaskową narzuconą jak dodatek, pewny siebie uśmiech sprzedawcy, unosi wykres słupkowy rosnącej wydajności, za nim wysokie regały paletowe.
+
+### Zofia Krawiec — BHP (zmęczona)
+**EN:**
+> 1970s Polish crime comic style portrait of a weary 50-year-old safety officer, grey bun, reading glasses on a chain, hi-vis vest over a cardigan, holding a thick stack of risk assessment binders against her chest, tired guilty eyes, a small cluttered office with a window onto the warehouse floor behind her, teal accent, [baza stylu]
+
+**PL:** znużona 50-letnia specjalistka BHP, siwy kok, okulary na łańcuszku, kamizelka odblaskowa na swetrze, przyciska do piersi stos segregatorów z oceną ryzyka, zmęczone oczy z poczuciem winy, za nią ciasne biuro z oknem na halę.
+
+### Jacek Doliński — kierownik zmiany (agresywny)
+**EN:**
+> 1970s Polish crime comic style portrait of a hard-driving 39-year-old shift manager, shaved head, hi-vis vest, walkie-talkie in a clenched fist, leaning forward aggressively, barking expression, a big wall clock and a productivity ranking board with names behind him, brick red accent, [baza stylu]
+
+**PL:** twardy 39-letni kierownik zmiany, ogolona głowa, kamizelka odblaskowa, krótkofalówka w zaciśniętej pięści, agresywnie pochylony do przodu, wykrzykujący wyraz twarzy, za nim duży zegar ścienny i tablica rankingu wydajności z nazwiskami.
+
+### Patryk Sowa — operator wózka (zgorzkniały)
+**EN:**
+> 1970s Polish crime comic style portrait of a sullen 26-year-old forklift operator, buzz cut, work jacket with company patch, sitting in the cab of a tall reach truck, arms folded over the steering wheel, bitter sarcastic half-smile, dented rack upright with warning tape in the background, blue accent, [baza stylu]
+
+**PL:** ponury 26-letni operator wózka, krótko ostrzyżony, kurtka robocza z naszywką firmy, siedzi w kabinie wysokiego wózka, ręce skrzyżowane na kierownicy, gorzki sarkastyczny półuśmiech, w tle wgnieciony słup regału oklejony taśmą ostrzegawczą.
+
+---
+
+## RUSZTOWANIE 🇬🇧 — `img/rusztowanie/`
+
+Wspólne tło serii: budowa bloku mieszkalnego w deszczowym Manchesterze lat 70. — rusztowania z rur i desek, siatki, ceglane mury, kontener biura budowy, szare niebo.
+
+| Plik | Postać | Strategia | Akcent |
+|---|---|---|---|
+| `craig.png` | Craig Bramhall — kierownik budowy (generalny wykonawca) | `agresywny` | ceglasty |
+| `linda.png` | Linda Hargreaves — koordynatorka BHP (H&S advisor) | `unika` | niebieski |
+| `konrad.png` | Konrad Zawilski — właściciel firmy murarskiej (podwykonawca) | `czaruje` | musztardowy |
+| `gustaw.png` | Gustaw Pietrzak — brygadzista murarzy | `zmeczony` | morski |
+
+### Craig Bramhall — kierownik budowy (agresywny)
+**EN:**
+> 1970s Polish crime comic style portrait of a red-faced 48-year-old English site manager, white hard hat pushed back, hi-vis jacket over a shirt and tie, jabbing a rolled-up programme chart toward the viewer, furious glare, site cabin with a wall planner full of red deadlines behind him, brick red accent, [baza stylu]
+
+**PL:** czerwony na twarzy 48-letni angielski kierownik budowy, biały kask zsunięty do tyłu, kurtka odblaskowa na koszuli z krawatem, wymachuje zrolowanym harmonogramem w stronę widza, wściekłe spojrzenie, za nim kontener biura z planerem pełnym czerwonych terminów.
+
+### Linda Hargreaves — koordynatorka BHP (unika)
+**EN:**
+> 1970s Polish crime comic style portrait of a cautious 36-year-old English health and safety advisor, neat ponytail under a white hard hat, hi-vis vest, clipboard with an inspection register held close, eyes avoiding the viewer, scaffolding wrapped in netting behind her, blue accent, [baza stylu]
+
+**PL:** ostrożna 36-letnia angielska koordynatorka BHP, schludny kucyk pod białym kaskiem, kamizelka odblaskowa, przyciska podkładkę z rejestrem inspekcji, wzrok unikający widza, za nią rusztowanie owinięte siatką.
+
+### Konrad Zawilski — podwykonawca (czaruje)
+**EN:**
+> 1970s Polish crime comic style portrait of a charming 52-year-old Polish building contractor in England, tweed flat cap, quilted gilet over a checked shirt, gold signet ring, warm persuasive smile, offering a handshake, a van with his company name painted on the side behind him, mustard yellow accent, [baza stylu]
+
+**PL:** czarujący 52-letni polski przedsiębiorca budowlany w Anglii, tweedowy kaszkiet, pikowana kamizelka na koszuli w kratę, złoty sygnet, ciepły przekonujący uśmiech, wyciąga rękę do uścisku, za nim furgonetka z namalowaną nazwą firmy.
+
+### Gustaw Pietrzak — brygadzista (zmęczony)
+**EN:**
+> 1970s Polish crime comic style portrait of an exhausted 57-year-old bricklayer foreman, weathered face, grey stubble, dusty hard hat in his hands, brick-dust on his work jacket, hollow tired eyes, sitting on a stack of bricks at the foot of a scaffold in the rain, teal accent, [baza stylu]
+
+**PL:** wyczerpany 57-letni brygadzista murarzy, ogorzała twarz, siwy zarost, zakurzony kask w dłoniach, ceglany pył na kurtce roboczej, puste zmęczone oczy, siedzi na stosie cegieł u stóp rusztowania w deszczu.
+
+---
+
+## BLOKADA 🇵🇱 — `img/blokada/`
+
+Wspólne tło serii: tłocznia z lat 70. — rzędy pras hydraulicznych, szafy sterownicze z otwartymi drzwiami, tablice z przyciskami, kraty, żółto-czarne pasy ostrzegawcze, kłódki.
+
+| Plik | Postać | Strategia | Akcent |
+|---|---|---|---|
+| `wieslaw.png` | Wiesław Kordecki — dyrektor zakładu | `agresywny` | ceglasty |
+| `ilona.png` | Ilona Sadurska — starsza specjalistka ds. BHP | `czaruje` | niebieski |
+| `bartosz.png` | Bartosz Mielczarek — kierownik utrzymania ruchu | `unika` | musztardowy |
+| `damian.png` | Damian Sowiński — brygadzista, operator pras (noc) | `zmeczony` | morski |
+| `urszula.png` | Urszula Węgrzyn — współwłaścicielka firmy serwisowej | `zgorzknialy` | fioletowy |
+
+### Wiesław Kordecki — dyrektor zakładu (agresywny)
+**EN:**
+> 1970s Polish crime comic style portrait of a domineering 58-year-old factory director, heavy-rimmed glasses, grey suit, slamming a palm on a desk covered with production reports, furious red face, a window overlooking a row of hydraulic presses behind him, brick red accent, [baza stylu]
+
+**PL:** apodyktyczny 58-letni dyrektor fabryki, okulary w grubych oprawkach, szary garnitur, uderza dłonią w biurko zasłane raportami produkcji, czerwona ze złości twarz, za nim okno z widokiem na rząd pras hydraulicznych.
+
+### Ilona Sadurska — BHP (czaruje)
+**EN:**
+> 1970s Polish crime comic style portrait of an elegant 44-year-old senior safety specialist, styled auburn hair, white helmet tucked under her arm, silk scarf, polished reassuring smile, presenting a laminated LOTO procedure poster like a certificate, an audit trophy on a shelf behind her, blue accent, [baza stylu]
+
+**PL:** elegancka 44-letnia starsza specjalistka BHP, ułożone rude włosy, biały kask pod pachą, jedwabna apaszka, wyćwiczony uspokajający uśmiech, prezentuje zalaminowany plakat procedury LOTO jak dyplom, za nią na półce trofeum z audytu.
+
+### Bartosz Mielczarek — utrzymanie ruchu (unika)
+**EN:**
+> 1970s Polish crime comic style portrait of an evasive 41-year-old maintenance manager, overalls with many pens in the chest pocket, ring of keys on his belt, looking down at a work order slip, avoiding eye contact, an open electrical control cabinet with tangled wires behind him, mustard yellow accent, [baza stylu]
+
+**PL:** wymijający 41-letni kierownik utrzymania ruchu, kombinezon z wieloma długopisami w kieszonce, pęk kluczy przy pasku, wpatrzony w kartkę zlecenia, unika kontaktu wzrokowego, za nim otwarta szafa sterownicza z plątaniną przewodów.
+
+### Damian Sowiński — brygadzista nocnej zmiany (zmęczony)
+**EN:**
+> 1970s Polish crime comic style portrait of a haggard 35-year-old night-shift press foreman, ear defenders around his neck, oil-stained work gloves, a single padlock key on a string in his hand, red-rimmed sleepless eyes, dim factory hall with a glowing press control panel behind him, teal accent, [baza stylu]
+
+**PL:** wymizerowany 35-letni brygadzista nocnej zmiany, nauszniki na szyi, poplamione olejem rękawice, w dłoni pojedynczy klucz do kłódki na sznurku, zaczerwienione niewyspane oczy, za nim półmrok hali i podświetlony pulpit prasy.
+
+### Urszula Węgrzyn — firma serwisowa (zgorzkniała)
+**EN:**
+> 1970s Polish crime comic style portrait of a sharp 53-year-old co-owner of a small hydraulic service firm, cropped grey hair, work fleece with a company logo, arms crossed, bitter knowing smirk, a toolbox and a pinned photo of her injured technician on a corkboard behind her, purple accent, [baza stylu]
+
+**PL:** cięta 53-letnia współwłaścicielka małej firmy serwisu hydrauliki, krótkie siwe włosy, polar roboczy z logo firmy, skrzyżowane ręce, gorzki porozumiewawczy uśmieszek, za nią skrzynka narzędziowa i przypięte do tablicy zdjęcie rannego technika.
+
+---
+
 ## Okładki spraw (opcjonalnie)
 
 Gra ich teraz nie wyświetla. Są przydatne do kart spraw w przyszłości i do udostępniania w social media. Wzór jak okładka FENIKSA w `prompty-grafiki.md`.
@@ -339,6 +457,9 @@ Postacie istniejących scenariuszy grają dziś z inicjałami. Poniżej krótkie
 | ROZSYŁKA | 3 | 10 | 15 | 1 |
 | LISTERIA | 4 | 13 | 20 | 1 |
 | KUPON | 4 | 13 | 20 | 1 |
+| REGAŁ | 4 | 14 | 20 | 1 |
+| RUSZTOWANIE | 4 | 13 | 20 | 1 |
+| BLOKADA | 5 | 17 | 25 | 1 |
 | Scenariusze 02–06 (etap 2) | 19 | wg strategii | 95 | 5 (wg wzoru) |
 
 Kolejność pracy: portrety spraw branżowych → emocje wymagane → okładki → etap 2.
