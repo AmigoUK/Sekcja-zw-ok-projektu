@@ -626,6 +626,56 @@ Prowadź całość po polsku. Zacznij dopiero po komendzie START.
   }
   // </emocje>
 
+  // <katalog>
+  // Czyste funkcje ekranu wyboru sprawy — bez DOM, testowane osobno (test/katalog.test.js).
+  const DOMENY_UI = {
+    projekty: { ikona:"📁", nazwa:"Projekty" },
+    zywnosc:  { ikona:"🍽️", nazwa:"Bezpieczeństwo żywności" },
+    rodo:     { ikona:"🔐", nazwa:"Dane i RODO" },
+  };
+  const FLAGI = { PL:"🇵🇱", UK:"🇬🇧" };      // UE nie dostaje flagi — to sprawy bez lokalnych realiów
+  const DOMYSLNA_SPRAWA = "FENIKS";
+
+  function grupujScenariusze(lista){
+    return Object.entries(DOMENY_UI)
+      .map(([domena, ui]) => ({ domena, ...ui, sprawy: lista.filter(s => s.meta.domena === domena) }))
+      .filter(g => g.sprawy.length);
+  }
+
+  // Reguła nadrzędna jak przy pojedynkach: nic tu nie może zablokować grania.
+  // Nieznane ID z pamięci albo z linku kończy się zwykłym startem.
+  function wybierzStartowy(lista, {zapamietany, wyzwanie} = {}){
+    const jest = id => lista.some(s => s.meta.id === id);
+    const domyslna = jest(DOMYSLNA_SPRAWA) ? DOMYSLNA_SPRAWA : lista[0].meta.id;
+    if(wyzwanie){
+      if(jest(wyzwanie)) return { id:wyzwanie, zablokowany:true, komunikat:null };
+      return { id: jest(zapamietany) ? zapamietany : domyslna, zablokowany:false,
+        komunikat:"Ta sprawa nie jest dostępna w tej wersji gry — możesz zagrać inną, ale bez pojedynku." };
+    }
+    return { id: jest(zapamietany) ? zapamietany : domyslna, zablokowany:false, komunikat:null };
+  }
+
+  // Model zaczyna wypowiedź od [Imię]. Nie ufamy formie co do joty: bywa z nazwiskiem
+  // albo wielkimi literami. [^\]] zamiast \w — \w w JS nie łapie „ż" w „Grażyna".
+  function rozpoznajMowce(odpowiedz, imiona){
+    const m = String(odpowiedz).match(/^\s*\[([^\]\n]{1,40})\]\s*/);
+    if(!m) return { imie:null, etykieta:null, tekst:String(odpowiedz) };
+    const etykieta = m[1].trim();
+    const male = etykieta.toLocaleLowerCase("pl");
+    const imie = imiona.find(i => {
+      const k = i.toLocaleLowerCase("pl");
+      return male === k || male.startsWith(k + " ");
+    }) || null;
+    return { imie, etykieta: imie || etykieta, tekst: String(odpowiedz).slice(m[0].length) };
+  }
+
+  function pierwszeZdanie(tekst){
+    const m = String(tekst).match(/^[\s\S]*?[.!?](?=\s|$)/);
+    return (m ? m[0] : String(tekst)).trim();
+  }
+  function kropkiPoziomu(poziom){ return "●".repeat(poziom) + "○".repeat(5 - poziom); }
+  // </katalog>
+
   // Tymczasowo do Task 6: obsada FENIKSA z bloku scenariuszy.
   state.obsada = zbudujObsade(SCENARIUSZE.find(s => s.meta.id === "FENIKS").meta);
   state.emocje = nowyStanEmocji(state.obsada);
@@ -645,11 +695,6 @@ Prowadź całość po polsku. Zacznij dopiero po komendzie START.
   function setCounter(){
     $("qnum").textContent = state.questions;
     $("counter").classList.toggle("warn", state.questions >= MAX_Q - 5);
-  }
-  function speakerLabel(reply){
-    const m = reply.match(/^\s*\[(\w+)\]\s*/);
-    if(m) return {name:m[1], text:reply.replace(/^\s*\[\w+\]\s*/,"")};
-    return {name:null, text:reply};
   }
 
   // ====== API MODELI ======
@@ -692,8 +737,9 @@ Prowadź całość po polsku. Zacznij dopiero po komendzie START.
     try{
       const reply = await callModel();
       state.history.push({role:"assistant", content:reply});
-      const {name, text} = speakerLabel(reply);
-      const who = name ? `<b>${name}</b>` : (state.phase === "debrief" ? "<b>Debrief</b>" : "Narrator");
+      const r = rozpoznajMowce(reply, Object.keys(state.obsada.postacie));
+      const name = r.imie, text = r.tekst;
+      const who = r.etykieta ? `<b>${r.etykieta}</b>` : (state.phase === "debrief" ? "<b>Debrief</b>" : "Narrator");
 
       const mowca = (name in state.obsada.postacie) ? name : (state.phase === "interview" ? state.persona : null);
       let portret = null;
