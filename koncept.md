@@ -1,6 +1,6 @@
 # „Sekcja zwłok projektu" — koncept narzędzia edukacyjnego
 
-*Interaktywna gra narracyjna ucząca prowadzenia post-mortem, analizy przyczyn źródłowych i odróżniania faktów od narracji. Sześć scenariuszy na czterech poziomach trudności + talia losowych modyfikatorów.*
+*Interaktywna gra narracyjna ucząca prowadzenia post-mortem, analizy przyczyn źródłowych i odróżniania faktów od narracji. Dziewięć scenariuszy (sześć projektowych, trzy branżowe) na kilku poziomach trudności + talia losowych modyfikatorów.*
 
 ---
 
@@ -44,6 +44,9 @@ Narzędzie ma architekturę dwuwarstwową, wymuszoną pierwotnie przez limit 8 0
 | 02 | NOVA — upadły startup | zaawansowany | konflikt personalny maskuje przyczyny systemowe; konflikt interesów (earn-out u foundera w 05) |
 | 05 | PRZEJĘCIE — exodus po akwizycji | zaawansowany | świadek-test: 70% prawdy, 30% plotek — obowiązkowa weryfikacja źródeł |
 | 06 | KONSORCJUM — projekt publiczny | ekspercki | **zmowa dwóch świadków**: spójne zeznania ≠ prawda; łamią ich tylko dokumenty; 5 postaci, 30 pytań |
+| 07 | CHŁODNIA — zatrucie w cateringu (PL) | podstawowy | **wiedza branżowa**: postacie wyjaśniają zasady (HACCP, łańcuch chłodniczy), a debrief dodaje „Lekcję branżową” ze źródłami |
+| 08 | SEZAM — alergen w kanapce PPDS (UK) | średni | dowód w wersjach: o przyczynie rozstrzyga porównanie wersji receptury i etykiety |
+| 09 | WYCIEK — naruszenie ochrony danych po phishingu (PL) | średni | iskra ≠ przyczyna w domenie RODO: phishing uruchomił incydent, ale go nie spowodował |
 
 **Talia modyfikatorów (regrywalność)** — opcjonalna warstwa losowa: jawny kontekst rynkowy (recesja, media, firma na sprzedaż…), niejawne zdarzenie w trakcie śledztwa (anonimowa koperta, wyciek do prasy, skrócenie budżetu pytań…) i niejawny modyfikator jednego świadka (prawnik u boku, wypalenie, nagrywanie rozmowy…). Losowanie jest deterministyczne z liczby podanej przez gracza (AI nie może „oszukiwać"), a zasada nadrzędna brzmi: modyfikatory zmieniają koszt i drogę dotarcia do prawdy, **nigdy samą prawdę** — dzięki czemu wyniki między rozgrywkami pozostają porównywalne.
 
@@ -91,8 +94,8 @@ Miarą sukcesu narzędzia jest różnica wyników między rozgrywkami tego sameg
 
 ## 7. Wykonanie
 
-- **Custom GPT:** `gpt/gpt-master-prompt.md` (Instructions, ~6,4 tys. znaków) + pliki wiedzy: 6 scenariuszy (`scenariusz-01…06`), `modyfikatory.md`, `szablon-scenariusza.md`.
-- **Prototyp HTML:** `sekcja-zwlok.html` — samodzielna aplikacja (jeden plik, zero backendu): wybór rozmówcy, licznik pytań, fazy raportu i debriefu; klucz API użytkownika (Anthropic lub OpenAI) pozostaje w pamięci przeglądarki. Scenariusz FENIKS wbudowany.
+- **Custom GPT:** `gpt/gpt-master-prompt.md` (Instructions, ~6,4 tys. znaków) + pliki wiedzy: 9 scenariuszy (`scenariusz-01…09`), `modyfikatory.md`, `szablon-scenariusza.md`.
+- **Prototyp HTML:** `sekcja-zwlok.html` — samodzielna aplikacja (jeden plik, zero backendu): wybór rozmówcy, licznik pytań, fazy raportu i debriefu; klucz API użytkownika (Anthropic lub OpenAI) pozostaje w pamięci przeglądarki. Biblioteka 9 spraw w 3 domenach wybierana na ekranie startowym; scenariusze żyją w `gpt/scenariusz-NN-*.md` z blokiem metadanych, a `npm run build` wstrzykuje je razem z silnikiem (`gpt/silnik-gra.md`) do HTML-a.
 - **Prompt referencyjny:** `system-prompt.md` — pełna wersja jednoplikowa (FENIKS), działa po wklejeniu do dowolnego czatu LLM.
 
 ## 8. Plan screencastu (3–4 min)

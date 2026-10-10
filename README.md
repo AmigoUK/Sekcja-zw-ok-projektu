@@ -6,14 +6,16 @@ Narracyjna gra edukacyjna: wcielasz się w facylitatora post-mortem i przesłuch
 
 ## Struktura repozytorium
 
-- `sekcja-zwlok.html` — gra (jeden plik, zero backendu). Obsługiwane silniki AI: Anthropic, OpenAI, GLM/Zhipu, DeepSeek, Groq (Llama) oraz lokalne: LM Studio, Ollama, llama.cpp i dowolny endpoint OpenAI-compatible. Ranking z autoryzacją mailową (tryb demo bez backendu), regulamin i polityka prywatności wbudowane.
+- `sekcja-zwlok.html` — gra (jeden plik, zero backendu) z biblioteką 9 spraw w 3 domenach (projekty, bezpieczeństwo żywności, dane i RODO), wybieranych na ekranie startowym; scenariusze i silnik wstrzykuje do pliku `npm run build`. Obsługiwane silniki AI: Anthropic, OpenAI, GLM/Zhipu, DeepSeek, Groq (Llama) oraz lokalne: LM Studio, Ollama, llama.cpp i dowolny endpoint OpenAI-compatible. Ranking z autoryzacją mailową (tryb demo bez backendu), regulamin i polityka prywatności wbudowane.
 - `ranking-server.js` — backend rankingu i pojedynków (Node.js + express + nodemailer): kody na email, maskowanie adresów (3 pierwsze + 3 ostatnie znaki), leaderboard, wyzwania. Konfiguracja w komentarzu na górze pliku.
 - `test/` — testy `node:test` (bez zależności zewnętrznych): `npm test`.
 - `docs/superpowers/specs/` — zatwierdzone specyfikacje funkcji.
 - `system-prompt.md` — pełny prompt jednoplikowy (scenariusz FENIKS) do wklejenia w dowolny czat LLM.
-- `gpt/` — pakiet Custom GPT: `gpt-master-prompt.md` (Instructions, <8000 znaków) + 6 scenariuszy, talia modyfikatorów losowych i szablon scenariusza (pliki wiedzy).
+- `gpt/` — źródło scenariuszy i pakiet Custom GPT: `gpt-master-prompt.md` (Instructions, <8000 znaków) + 9 scenariuszy (`scenariusz-NN-*.md`), talia modyfikatorów losowych i szablon scenariusza (pliki wiedzy). `gpt/silnik-gra.md` to prompt silnika używany w grze.
+- `scripts/` — `scenariusze.js` (parser i walidator metadanych) oraz `build-scenariusze.js` (`npm run build`: wstrzykuje `SILNIK` i `SCENARIUSZE` do `sekcja-zwlok.html`).
 - `img/` — grafiki w stylu polskiego komiksu kryminalnego lat 70. (opis niżej).
-- `prompty-grafiki.md` — prompty do generatorów obrazu użyte do stworzenia grafik.
+- `prompty-grafiki.md` — prompty do generatorów obrazu użyte do stworzenia grafik FENIKS.
+- `prompty-grafiki-scenariusze.md` — prompty i lista plików grafik dla postaci pozostałych spraw.
 - `koncept.md` — pełny koncept narzędzia (mechanika, analiza wartości, wnioski z iteracji, plan screencastu).
 - `deck.js` + `sekcja-zwlok-prezentacja.pptx` — generator i gotowa prezentacja konceptu.
 
@@ -28,11 +30,36 @@ Narracyjna gra edukacyjna: wcielasz się w facylitatora post-mortem i przesłuch
 
 Grafiki w repozytorium są przeskalowane pod web. Oryginały 1254×1254 nie są wersjonowane — raster halftone kompresuje się fatalnie w PNG (~3,3 MB na plik).
 
+## Scenariusze
+
+Gra ma bibliotekę spraw, pogrupowaną na ekranie startowym według domen: 📁 Projekty (BILBORD, FENIKS, BLACKOUT, NOVA, PRZEJĘCIE, KONSORCJUM), 🍽️ Bezpieczeństwo żywności (CHŁODNIA 🇵🇱, SEZAM 🇬🇧), 🔐 Dane i RODO (WYCIEK 🇵🇱). Ostatni wybór pamięta `localStorage`, a link z wyzwaniem blokuje sprawę na tę z pojedynku.
+
+Jak dodać sprawę:
+
+1. Skopiuj `gpt/szablon-scenariusza.md` do `gpt/scenariusz-NN-nazwa.md`.
+2. Wypełnij blok metadanych (YAML na początku pliku) i treść.
+3. `npm run build` — waliduje metadane i wstrzykuje scenariusze do `sekcja-zwlok.html`.
+4. `npm test` — test zawodzi, jeśli wstrzyknięty blok jest nieaktualny.
+
+| Pole | Wartości | Rola |
+|---|---|---|
+| `id` | `[A-Z0-9_]{1,40}` | Klucz w rankingu i pojedynkach, niezmienny po publikacji. |
+| `tytul` | tekst | Nagłówek karty sprawy i akt. |
+| `domena` | `projekty`, `zywnosc`, `rodo` | Grupowanie na ekranie startowym. |
+| `jurysdykcja` | `PL`, `UK`, `UE` | Flaga na karcie i ramy prawne w debriefie (`UE` bez flagi). |
+| `poziom` | 1–5 | Od wprowadzającego do eksperckiego; sortowanie w domenie. |
+| `pytania` | liczba | Budżet pytań. |
+| `postacie[]` | `imie`, `nazwisko`, `rola`, `strategia`, `odmiana` | Rozmówcy; `odmiana` to formy imienia (pierwsza = mianownik), po których gra wykrywa konfrontację. |
+
+**Źródła w scenariuszach branżowych.** Sekcja `ZASADY DO DEBRIEFU` przypisuje każdej przyczynie regułę wraz ze źródłem (akt prawny lub wytyczna urzędu, z linkiem). Debrief pokazuje je jako nieoceniany blok „Lekcja branżowa” — bez wpływu na punktację. Reguł nie wolno pisać z pamięci.
+
+**Grafiki.** Portrety: `img/<slug(id)>/<slug(imię)>.png`, mimika: `img/<slug(id)>/emocje/<slug>-<emocja>.jpg` (slug = małe litery bez polskich znaków; FENIKS zachowuje stare ścieżki `img/*.png` i `img/emocje/*`). Brak pliku = fallback do inicjałów. Lista plików i prompty: [`prompty-grafiki-scenariusze.md`](prompty-grafiki-scenariusze.md).
+
 ## Szybki start
 
 Otwórz `sekcja-zwlok.html` w przeglądarce, wybierz silnik AI, wklej klucz (lub uruchom lokalny serwer modelu) i kliknij „Rozpocznij śledztwo".
 
-Ranking ogólny: uruchom `ranking-server.js` i ustaw `RANKING_API` na początku skryptu w `sekcja-zwlok.html`.
+Ranking ogólny: uruchom `ranking-server.js` i ustaw `RANKING_API` na początku skryptu w `sekcja-zwlok.html`. Wyniki konkretnej sprawy zwraca `GET /api/leaderboard?scenario=ID` (50 najlepszych; bez parametru — ranking ogólny), a modal rankingu w grze ma zakładkę dla każdej sprawy.
 
 ```
 npm install
@@ -72,7 +99,17 @@ Emocji nie wybiera model. Wynika ona z **kształtu przesłuchania**, bo przeglą
 
 Pytanie zadane komu innemu pozwala postaci ostygnąć.
 
-Ta sama presja daje **inną minę u każdej postaci**, zależnie od jej strategii obronnej: Marek (unika) idzie w smutek → zaskoczenie → rezygnację, Beata (czaruje) w radość → zaskoczenie → złość, Tomek (zgorzkniały) w radość → złość → rezygnację, Iwona (zmęczona) w smutek → rezygnację → złość. Mimika jest więc informacją zwrotną o jakości pytań, a nie ozdobnikiem.
+Ta sama presja daje **inną minę u każdej postaci**, zależnie od jej strategii obronnej:
+
+| Strategia | Łuk emocji |
+|---|---|
+| `unika` | smutek → zaskoczenie → rezygnacja |
+| `czaruje` | radość → zaskoczenie → złość |
+| `zgorzknialy` | radość → złość → rezygnacja |
+| `zmeczony` | smutek → rezygnacja → złość |
+| `agresywny` | złość → złość → rezygnacja |
+
+Strategię i formy odmiany imienia (po których wykrywana jest konfrontacja) deklaruje scenariusz w bloku metadanych. Mimika jest więc informacją zwrotną o jakości pytań, a nie ozdobnikiem.
 
 Logika siedzi w bloku `// <emocje>` … `// </emocje>` w `sekcja-zwlok.html` — czyste funkcje bez DOM. Testy (`test/emocje.test.js`) wycinają ten blok z HTML-a i wykonują w izolacji, dzięki czemu gra zostaje jednym plikiem, a logika ma prawdziwe testy jednostkowe.
 

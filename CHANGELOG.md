@@ -1,0 +1,42 @@
+# Changelog
+
+All notable changes to **Sekcja zwłok projektu** are documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+_Nothing yet._
+
+## [1.1.0] — 2026-10-10
+
+### Added
+- Biblioteka spraw: wybór scenariusza na ekranie startowym, pogrupowany według domen (projekty, bezpieczeństwo żywności, dane i RODO).
+- Trzy scenariusze branżowe: CHŁODNIA (🇵🇱 zatrucie w cateringu), SEZAM (🇬🇧 alergen w kanapce PPDS), WYCIEK (🇵🇱 naruszenie ochrony danych).
+- W grze dostępne także scenariusze BILBORD, NOVA, BLACKOUT, PRZEJĘCIE i KONSORCJUM, dotąd tylko w pakiecie Custom GPT.
+- „Lekcja branżowa” w debriefie: zasada i jej źródło przy każdej przyczynie (bez wpływu na punktację).
+- Ranking z podziałem na sprawy (`GET /api/leaderboard?scenario=ID`).
+- `npm run build` — scenariusze z `gpt/*.md` wstrzykiwane do gry; walidacja metadanych w testach.
+- Prompty grafik dla postaci nowych spraw (`prompty-grafiki-scenariusze.md`).
+
+### Changed
+- Mimika postaci wynika ze strategii obronnej zadeklarowanej w scenariuszu, a konfrontacja jest wykrywana po formach odmiany z metadanych.
+- Pojedynek blokuje wybór sprawy na scenariuszu z wyzwania.
+
+### Fixed
+- Rozpoznawanie mówcy, gdy imię postaci zawiera polskie znaki (np. „[Grażyna]”).
+- Etykieta mówcy jest escapowana przy wyświetlaniu.
+
+## [1.0.0] — 2026-08-12
+
+### Added
+- Gra „Sekcja zwłok projektu” ze scenariuszem FENIKS, wieloma silnikami AI i rankingiem z autoryzacją mailową.
+- Pojedynki: wyzwanie znajomego na pobicie wyniku.
+- Emocje rozmówców w przestrzeni czatu.
+- Opcjonalne zapamiętywanie klucza API w pamięci sesyjnej karty.
+- Ranking na SQLite: trwałe kody, bilety i limity.
+
+[Unreleased]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/releases/tag/v1.0.0
