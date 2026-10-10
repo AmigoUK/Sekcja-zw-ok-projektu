@@ -2,6 +2,8 @@
 
 Estetyka inspirowana polskimi komiksami milicyjnymi z lat 70. (klimat serii w rodzaju „Kapitana Żbika"): płaskie kolory z ograniczonej palety, gruby czarny kontur tuszem, raster offsetowy (kropki halftone), lekko wyblakły papier, dramatyczne kadrowanie i cienie jak w kryminale. Poniżej gotowe prompty dla generatorów obrazu (Midjourney, DALL-E, Stable Diffusion/Flux) — po angielsku (działają najlepiej) + wersje polskie.
 
+Postacie scenariuszy branżowych (CHŁODNIA, SEZAM, WYCIEK) i scenariuszy 02–06: [`prompty-grafiki-scenariusze.md`](prompty-grafiki-scenariusze.md).
+
 ## Specyfikacja plików dla gry
 
 Aplikacja automatycznie podmienia inicjały na portrety, jeśli obok `sekcja-zwlok.html` istnieje katalog `img/` z plikami:

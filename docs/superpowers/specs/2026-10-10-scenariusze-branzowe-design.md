@@ -41,7 +41,7 @@ poziom: 2
 pytania: 25
 postacie:
   - imie: Halina
-    nazwisko: Krupa
+    nazwisko: Sobczak
     rola: "Kierowniczka kuchni"
     strategia: unika
     odmiana: [Halina, Haliny, Halinie, Halinę, Haliną, Halino]
@@ -77,7 +77,7 @@ Dwie zmiany w części prozatorskiej szablonu:
 
 Funkcje `poPytaniu`, `napiecieDla`, `emocjaDla`, `wykryjKonfrontacje` dostają aktywny scenariusz (lista postaci z ich strategią i regexem) zamiast czytać stałe globalne. Regex konfrontacji budowany z `odmiana` używa tych samych granic Unicode co dziś: `(?<!\p{L})(forma1|forma2|…)(?!\p{L})` z flagą `iu`, formy escapowane.
 
-Grafiki: gra szuka `img/<id-małymi>/<imie-małymi>.png` i `img/<id-małymi>/emocje/<imie>-<emocja>.jpg`. Przy braku pliku działa istniejący fallback do inicjałów (portret w panelu) i do usunięcia obrazka (portret przy dymku). FENIKS zachowuje obecne ścieżki `img/*.png` i `img/emocje/*` — wyjątek zapisany w jednym miejscu.
+Grafiki: gra szuka `img/<id>/<slug>.png` i `img/<id>/emocje/<slug>-<emocja>.jpg`, gdzie `<id>` i `<slug>` (mianownik imienia) to małe litery bez polskich znaków (`Grażyna` → `grazyna`, `CHLODNIA` → `chlodnia`). Pełna lista plików i prompty: `prompty-grafiki-scenariusze.md`. Przy braku pliku działa istniejący fallback do inicjałów (portret w panelu) i do usunięcia obrazka (portret przy dymku). FENIKS zachowuje obecne ścieżki `img/*.png` i `img/emocje/*` — wyjątek zapisany w jednym miejscu.
 
 ### Silnik w grze
 
@@ -126,8 +126,8 @@ Pełne treści powstają w implementacji według szablonu; poniżej uzgodniony s
 Firma cateringowa przygotowała przyjęcie komunijne dla 180 osób; ponad 60 gości zachorowało, sanepid prowadzi dochodzenie epidemiologiczne. Właściciel wynajmuje gracza przed decyzją PPIS.
 
 - Przyczyny: schładzanie gulaszu w 50-litrowych garnkach w zwykłej chłodni, bo schładzarka szokowa była zepsuta od 3 tygodni, a naprawę odkładano; zlecenie na 180 porcji przy mocach na ~100, więc gotowanie dzień wcześniej; karty temperatur wypełniane z pamięci na koniec tygodnia; HACCP kupiony jako szablon bez CCP dla schładzania.
-- Postacie: Ryszard — właściciel (`agresywny`), Halina — kierowniczka kuchni (`unika`), Kuba — kucharz (`zmeczony`), Ewa — zewnętrzna konsultantka HACCP (`czaruje`).
-- Konfrontacje: SMS Kuby do szefa o szokówce łamie Ryszarda; faktura Ewy (wdrożenie bez wizyty w kuchni) łamie wersję Haliny „mamy HACCP”.
+- Postacie: Ryszard Mazur — właściciel (`agresywny`), Halina Sobczak — kierowniczka kuchni (`unika`), Kuba Nowicki — kucharz (`zmeczony`), Dorota Kmieć — zewnętrzna konsultantka HACCP (`czaruje`).
+- Konfrontacje: SMS Kuby do szefa o szokówce łamie Ryszarda; faktura Doroty (wdrożenie bez wizyty w kuchni) łamie wersję Haliny „mamy HACCP”.
 - Fałszywe tropy: „zepsute mięso od dostawcy”, „goście jedli lody na festynie”, „Kuba nie mył rąk” (kozioł ofiarny).
 
 ### 08 SEZAM 🇬🇧 — żywność · poziom 3 · 25 pytań
@@ -135,7 +135,7 @@ Firma cateringowa przygotowała przyjęcie komunijne dla 180 osób; ponad 60 go�
 Polska piekarnia w Leicester sprzedaje kanapki pakowane na miejscu (PPDS). Klientka z alergią na sezam trafiła do szpitala; po wizycie EHO ocena higieny może spaść. Właścicielka wynajmuje gracza.
 
 - Przyczyny: dostawca zamienił mieszankę posypki na wersję z sezamem, nikt nie sprawdził nowej specyfikacji; szablon etykiety niepowiązany z wersją receptury; szkolenie z alergenów raz, przy zatrudnieniu, tylko po angielsku; brak procedury odpowiadania na pytania klientów o alergeny.
-- Postacie: Grażyna — właścicielka (`unika`), Kasia — kierowniczka produkcji (`czaruje`), Darek — piekarz nocnej zmiany (`zgorzknialy`), Priya — obsługa sali (`zmeczony`).
+- Postacie: Grażyna Wójcik — właścicielka (`unika`), Kasia Dąbrowska — kierowniczka produkcji (`czaruje`), Darek Kowal — piekarz nocnej zmiany (`zgorzknialy`), Priya Shah — obsługa sali (`zmeczony`).
 - Nowa mechanika: **dowód w wersjach** — prawdę ujawnia dopiero zestawienie dwóch dokumentów (stara i nowa specyfikacja dostawcy; etykieta i receptura).
 - Ramy: Natasha's Law (PPDS), 14 alergenów, wytyczne FSA, Food Hygiene Rating Scheme.
 
@@ -144,7 +144,7 @@ Polska piekarnia w Leicester sprzedaje kanapki pakowane na miejscu (PPDS). Klien
 Sieć szkół językowych, baza 40 tys. kursantów wypłynęła na forum, zgłoszenie do UODO po 9 dniach. Rada nadzorcza wynajmuje gracza.
 
 - Przyczyny: MFA dla kont administracyjnych zaproponowane i wycięte z budżetu; pełna kopia produkcyjnej bazy na publicznie dostępnym serwerze testowym; prezes wstrzymał zgłoszenie (art. 33 RODO — 72 godziny), bo trwały rozmowy z inwestorem; IOD dowiedział się z mediów — brak procedury eskalacji.
-- Postacie: Robert — prezes (`agresywny`), Paweł — administrator (`zgorzknialy`), Monika — księgowa, która kliknęła link (`zmeczony`, obwinia się ponad miarę), Adam — zewnętrzny IOD (`czaruje`).
+- Postacie: Zbigniew Pietras — prezes (`agresywny`), Grzegorz Ostrowski — administrator (`zgorzknialy`), Monika Bielecka — księgowa, która kliknęła link (`zmeczony`, obwinia się ponad miarę), Wojciech Lis — zewnętrzny IOD (`czaruje`).
 - Fałszywe tropy: „Monika kliknęła” (iskra, nie przyczyna), „zaawansowana grupa APT”, „IOD powinien był wiedzieć”.
 
 ### Warunek publikacji treści merytorycznej
@@ -169,7 +169,7 @@ Każda zasada w `ZASADY DO DEBRIEFU` i każda liczba w linii `Wiedza branżowa` 
 
 ## Poza zakresem
 
-Konta firmowe i panel prowadzącego, certyfikaty, ranking łączny, grafiki dla nowych postaci (prompty mogą powstać później w `prompty-grafiki.md`), scenariusze z ochrony zdrowia, angielska wersja interfejsu.
+Konta firmowe i panel prowadzącego, certyfikaty, ranking łączny, samo generowanie grafik (prompty są w `prompty-grafiki-scenariusze.md`, gra działa bez obrazów), scenariusze z ochrony zdrowia, angielska wersja interfejsu.
 
 ## Wersja
 
