@@ -14,3 +14,6 @@ ranking-data.json.migrated
 ranking.db
 ranking.db-wal
 ranking.db-shm
+
+# worktree dla pracy równoległej (superpowers)
+.worktrees/
