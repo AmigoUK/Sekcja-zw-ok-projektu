@@ -1,6 +1,6 @@
 {
   "name": "sekcja-zwlok-projektu",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Narracyjna gra edukacyjna: symulator post-mortem, w którym przesłuchujesz AI odgrywające członków upadłego projektu.",
   "license": "MIT",
   "private": false,
@@ -25,12 +25,12 @@
   },
   "dependencies": {
     "express": "^4.22.2",
-    "nodemailer": "^9.0.5"
+    "nodemailer": "^10.0.16"
   },
   "devDependencies": {
     "pptxgenjs": "^3.12.0"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22.5"
   }
 }

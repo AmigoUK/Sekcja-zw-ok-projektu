@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 _Nothing yet._
 
+## [1.2.1] — 2026-10-10
+
+### Security
+- `nodemailer` 9.1.1 → 10.0.16 (serwer rankingu): poprawki DoS w parserze adresów i obejść walidacji domen odbiorcy (GHSA-v53p-9fqp-m79j, GHSA-2x7j-588g-ccc2 i in.).
+- `express` 4.22.3 z `proxy-addr` 2.0.8 (podszywanie się pod IP przez adresy IPv4-mapped IPv6, GHSA-jqcg-44mw-7w3h) i `qs` 6.16.0 (DoS, obejście limitu tablic).
+
+### Changed
+- Wymagany Node.js ≥ 22.5 (`engines`) — serwer i tak korzysta z wbudowanego `node:sqlite`, a `nodemailer` 10 wymaga Node 20+.
+
 ## [1.2.0] — 2026-10-10
 
 ### Added
@@ -44,7 +53,8 @@ _Nothing yet._
 - Opcjonalne zapamiętywanie klucza API w pamięci sesyjnej karty.
 - Ranking na SQLite: trwałe kody, bilety i limity.
 
-[Unreleased]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/compare/v1.2.1...HEAD
+[1.2.1]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/releases/tag/v1.0.0
