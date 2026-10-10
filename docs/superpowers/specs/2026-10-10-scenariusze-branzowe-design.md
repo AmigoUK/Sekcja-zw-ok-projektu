@@ -111,7 +111,7 @@ Po wyborze sprawy z metadanych generują się: panel rozmówców (dziś zaszyty 
 
 `GET /api/leaderboard?scenario=ID` zwraca 50 najlepszych wyników tej sprawy. Bez parametru — zachowanie jak dziś. Schemat bazy bez zmian (klucz `(email, scenario)` już istnieje).
 
-W grze modal rankingu ma zakładki spraw obecnych w rankingu, domyślnie otwarta na sprawie bieżącej. Tryb demo filtruje `state.demoRank` tak samo.
+W grze modal rankingu ma zakładki wszystkich spraw dostępnych w tej wersji gry (pusta zakładka pokazuje „Brak wpisów w tej sprawie”), domyślnie otwarta na sprawie bieżącej. Tryb demo filtruje `state.demoRank` tak samo.
 
 ### Pojedynki
 

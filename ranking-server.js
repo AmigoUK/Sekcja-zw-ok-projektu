@@ -24,6 +24,7 @@
  *                                                                     zwraca bilet na wyzwanie,
  *                                                                     opcjonalnie rozstrzyga pojedynek
  *   GET  /api/leaderboard                                          -> top 50, e-maile ZAMASKOWANE
+ *   GET  /api/leaderboard[?scenario=ID]  → {entries}  (bez parametru: wszystkie sprawy)
  *   POST /api/challenge           {ticket, targetName, targetEmail} -> wysyła zaproszenie do pojedynku
  *   GET  /api/challenge/:id                                        -> dane wyzwania do wyświetlenia
  *   POST /api/challenge/:id/answer {nick, score}                   -> odpowiedź anonimowa
@@ -359,9 +360,12 @@ app.post("/api/submit-score", async (req, res) => {
 });
 
 app.get("/api/leaderboard", (req, res) => {
-  const entries = sql.prepare("SELECT nick, email, score, scenario, date FROM scores ORDER BY score DESC LIMIT 50")
-    .all()
-    .map(s => ({ nick: s.nick, email: maskEmail(s.email), score: s.score, scenario: s.scenario, date: s.date }));
+  // Bez parametru — zachowanie sprzed biblioteki spraw (stare wersje gry).
+  const scenario = req.query.scenario == null ? null : String(req.query.scenario).slice(0, 40);
+  const rows = scenario == null
+    ? sql.prepare("SELECT nick, email, score, scenario, date FROM scores ORDER BY score DESC LIMIT 50").all()
+    : sql.prepare("SELECT nick, email, score, scenario, date FROM scores WHERE scenario = ? ORDER BY score DESC LIMIT 50").all(scenario);
+  const entries = rows.map(s => ({ nick: s.nick, email: maskEmail(s.email), score: s.score, scenario: s.scenario, date: s.date }));
   res.json({ entries });   // nigdy nie zwracamy pełnych e-maili
 });
 

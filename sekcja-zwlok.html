@@ -31,6 +31,8 @@
     padding:6px 14px; border-radius:20px; cursor:pointer; user-select:none;
   }
   .chip:hover{border-color:var(--amber-dim); color:var(--ink)}
+  button.chip{font:inherit; font-size:12.5px; cursor:pointer}
+  .rtabs{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px} .rtabs .chip.on{border-color:var(--amber); color:var(--ink)}
   #counter{display:none}
   #counter b{color:var(--amber)}
   #counter.warn b{color:var(--red)}
@@ -990,8 +992,10 @@
   }
   // Tryb demo — działa bez backendu (bez prawdziwej wysyłki maili).
   function demoApi(path, payload){
-    if(path === "/api/leaderboard"){
-      return Promise.resolve({entries: state.demoRank.slice().sort((a,b)=>b.score-a.score)});
+    if(path.startsWith("/api/leaderboard")){
+      const sc = new URLSearchParams(path.split("?")[1] || "").get("scenario");
+      return Promise.resolve({entries: state.demoRank.filter(e => !sc || e.scenario === sc)
+        .sort((a,b)=>b.score-a.score)});
     }
     if(path === "/api/request-code"){
       state.demoCode = String(Math.floor(100000 + Math.random()*900000));
@@ -1012,18 +1016,21 @@
     return Promise.reject(new Error("Nieznana ścieżka."));
   }
 
-  async function showLeaderboard(){
-    openModal("🏆 Ranking śledczych", "<p class='muted'>Wczytywanie…</p>");
+  async function showLeaderboard(id = idSprawy()){
+    const zakladki = SCENARIUSZE.map(s =>
+      `<button type="button" class="chip${s.meta.id === id ? " on" : ""}" data-rank="${escapeHtml(s.meta.id)}">${escapeHtml(s.meta.id)}</button>`).join(" ");
+    openModal("🏆 Ranking śledczych", `<div class="rtabs">${zakladki}</div><div id="rankBody"><p class='muted'>Wczytywanie…</p></div>`);
+    $("mbody").querySelectorAll("[data-rank]").forEach(b => b.addEventListener("click", () => showLeaderboard(b.dataset.rank)));
     try{
-      const data = await api("/api/leaderboard");
+      const data = await api("/api/leaderboard?scenario=" + encodeURIComponent(id));
       const rows = (data.entries || []).map((e,i) =>
-        `<tr><td>${i+1}.</td><td>${escapeHtml(e.nick)}</td><td class="mono">${escapeHtml(e.email)}</td><td>${e.score}</td><td>${escapeHtml(e.scenario||"")}</td></tr>`).join("");
-      $("mbody").innerHTML = `
+        `<tr><td>${i+1}.</td><td>${escapeHtml(e.nick)}</td><td class="mono">${escapeHtml(e.email)}</td><td>${e.score}</td></tr>`).join("");
+      $("rankBody").innerHTML = `
         ${RANKING_API ? "" : "<p class='muted'>Tryb DEMO — ranking lokalny, bez backendu. Skonfiguruj RANKING_API, by włączyć ranking ogólny z autoryzacją mailową.</p>"}
-        <table class="rank"><tr><th>#</th><th>Nick</th><th>E-mail (maskowany)</th><th>Wynik</th><th>Scenariusz</th></tr>${rows || "<tr><td colspan='5' class='muted'>Brak wpisów.</td></tr>"}</table>`;
-    }catch(e){ $("mbody").innerHTML = `<p class="errmsg">Nie udało się pobrać rankingu: ${escapeHtml(e.message)}</p>`; }
+        <table class="rank"><tr><th>#</th><th>Nick</th><th>E-mail (maskowany)</th><th>Wynik</th></tr>${rows || "<tr><td colspan='4' class='muted'>Brak wpisów w tej sprawie.</td></tr>"}</table>`;
+    }catch(e){ $("rankBody").innerHTML = `<p class="errmsg">Nie udało się pobrać rankingu: ${escapeHtml(e.message)}</p>`; }
   }
-  $("rankBtn").addEventListener("click", showLeaderboard);
+  $("rankBtn").addEventListener("click", () => showLeaderboard());
   function escapeHtml(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
 
   $("saveScoreBtn").addEventListener("click", () => {
