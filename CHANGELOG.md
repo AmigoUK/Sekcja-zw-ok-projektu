@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+_Nothing yet._
+
+## [1.2.0] — 2026-10-10
+
 ### Added
+- Trzy nowe sprawy szkoleniowe: ROZSYŁKA (🇬🇧 RODO, poziom 1 — arkusz zwolnień lekarskich wysłany do całej firmy), LISTERIA (🇵🇱 żywność, poziom 4 — wycofanie parówek z zakładu mięsnego, kryteria L. monocytogenes po nowelizacji 2024/2895), KUPON (🇵🇱 RODO, poziom 4 — aplikacja lojalnościowa sieci pizzerii, alergie jako dane o zdrowiu, powierzenie i wyciek przez API).
+- Prompty grafik dla 11 nowych postaci w `prompty-grafiki-scenariusze.md`.
 - `npm run grafiki -- <katalog>` — import grafik postaci z luźno nazwanych plików (np. „CHŁODNIA - Ryszard - złość.png”): rozpoznanie sprawy, postaci i emocji, przycięcie i skalowanie do formatów gry; `--stan` pokazuje brakujące wymagane grafiki.
 
 ## [1.1.0] — 2026-10-10
@@ -38,6 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Opcjonalne zapamiętywanie klucza API w pamięci sesyjnej karty.
 - Ranking na SQLite: trwałe kody, bilety i limity.
 
-[Unreleased]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/releases/tag/v1.0.0
