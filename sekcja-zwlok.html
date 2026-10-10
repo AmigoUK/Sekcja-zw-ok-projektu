@@ -454,6 +454,7 @@ Prowadź całość po polsku. Zacznij dopiero po komendzie START.
     demoCode:null, demoEmail:null,
     challenge:null,          // {id, nick, score, scenario} — kontekst pojedynku, gdy wejście przez link ?w=
     duelDone:false,          // czy odpowiedź na wyzwanie została już wysłana w tej rozgrywce
+    obsada:null,
     emocje:null,             // stan napięcia per postać; inicjowany po zdefiniowaniu funkcji
   };
 
@@ -533,37 +534,58 @@ Prowadź całość po polsku. Zacznij dopiero po komendzie START.
   const EMOCJE_WAGI = { nacisk:0.22, konfrontacja:0.35, zegar:0.25, powrot:0.15, ostyganie:0.10 };
   const EMOCJE_LUKA_POWROTU = 3;          // ile pytań musi minąć, by powrót się liczył
 
-  // Ta sama presja daje inną minę u każdego — mimika odbija strategię obronną postaci.
-  const EMOCJE_ARC = {
-    Marek: ["neutral", "smutek",  "zaskoczenie", "rezygnacja"],  // unika odpowiedzi
-    Beata: ["neutral", "radosc",  "zaskoczenie", "zlosc"],       // czaruje i zmienia temat
-    Tomek: ["neutral", "radosc",  "zlosc",       "rezygnacja"],  // zgorzkniały, „a nie mówiłem"
-    Iwona: ["neutral", "smutek",  "rezygnacja",  "zlosc"],       // zmęczona, lojalna
-  };
-  // Polski odmienia imiona, więc dopasowujemy rdzeń: „Tomka", „Beacie", „Iwonę".
-  // Dwie pułapki:
-  //  1. oboczność spółgłoskowa — Beata → Beacie (t przechodzi w c), sam rdzeń „beat" nie wystarczy;
-  //  2. \b w JS jest ASCII-only, więc po „ę" czy „ą" NIE ma granicy słowa i dopasowanie
-  //     cicho przepada. Stąd asercje (?<!\p{L}) / (?!\p{L}) z flagą u zamiast \b.
-  const EMOCJE_RDZENIE = {
-    Marek: /(?<!\p{L})mar(ek|ka|kowi|kiem|ku)(?!\p{L})/iu,
-    Beata: /(?<!\p{L})bea(t[ayęąo]|cie)(?!\p{L})/iu,
-    Tomek: /(?<!\p{L})tom(ek|ka|kowi|kiem|ku)(?!\p{L})/iu,
-    Iwona: /(?<!\p{L})iwon(a|y|ie|ę|ą|o)(?!\p{L})/iu,
+  // Ta sama presja daje inną minę u każdego — mimika odbija strategię obronną postaci,
+  // zapisaną w metadanych scenariusza.
+  const EMOCJE_LUKI = {
+    unika:       ["neutral", "smutek",  "zaskoczenie", "rezygnacja"],  // ucieka od odpowiedzi
+    czaruje:     ["neutral", "radosc",  "zaskoczenie", "zlosc"],       // uśmiecha się i zmienia temat
+    zgorzknialy: ["neutral", "radosc",  "zlosc",       "rezygnacja"],  // „a nie mówiłem"
+    zmeczony:    ["neutral", "smutek",  "rezygnacja",  "zlosc"],       // zmęczony, lojalny
+    agresywny:   ["neutral", "zlosc",   "zlosc",       "rezygnacja"],  // atakuje, aż opadnie z sił
   };
 
-  function nowyStanEmocji(){
-    return { bazowe:{Marek:0, Beata:0, Tomek:0, Iwona:0}, ostatniIndeks:{}, ostatnia:null };
+  // Nazwy plików grafik: małe litery bez polskich znaków. NFD rozkłada „ż" na „z"
+  // i kropkę, ale „ł" nie ma rozkładu — zamieniamy je ręcznie.
+  function slug(s){
+    return String(s).replace(/ł/g, "l").replace(/Ł/g, "L").normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "").toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  }
+  function escapeRe(s){ return String(s).replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+
+  // Obsada = postacie aktywnej sprawy w kształcie potrzebnym modelowi napięcia.
+  // Polski odmienia imiona, więc konfrontację wykrywamy po pełnej liście form
+  // z metadanych („Tomka", „Beacie", „Iwonę") — autor scenariusza je wypisuje,
+  // zamiast zgadywać oboczności regexem. \b w JS jest ASCII-only: po „ę" czy „ą"
+  // NIE ma granicy słowa i dopasowanie cicho przepada. Stąd (?<!\p{L}) / (?!\p{L}) z flagą u.
+  function zbudujObsade(meta){
+    // FENIKS ma grafiki w ścieżkach sprzed biblioteki spraw — nie przenosimy ich.
+    const katalog = meta.id === "FENIKS" ? "img/" : `img/${slug(meta.id)}/`;
+    const postacie = {};
+    for(const p of meta.postacie){
+      postacie[p.imie] = {
+        luk: EMOCJE_LUKI[p.strategia] || EMOCJE_LUKI.unika,
+        re: new RegExp(`(?<!\\p{L})(${p.odmiana.map(escapeRe).join("|")})(?!\\p{L})`, "iu"),
+        plik: slug(p.imie),
+      };
+    }
+    return { katalog, postacie };
+  }
+
+  function nowyStanEmocji(obsada){
+    const bazowe = {};
+    for(const k of Object.keys(obsada.postacie)) bazowe[k] = 0;
+    return { bazowe, ostatniIndeks:{}, ostatnia:null };
   }
 
   // Konfrontacja = gracz cytuje kogoś innego niż rozmówca („Tomek pisał do Ciebie…").
-  function wykryjKonfrontacje(tekst, biezaca){
-    return Object.entries(EMOCJE_RDZENIE)
-      .some(([imie, re]) => imie !== biezaca && re.test(String(tekst)));
+  function wykryjKonfrontacje(obsada, tekst, biezaca){
+    return Object.entries(obsada.postacie)
+      .some(([imie, p]) => imie !== biezaca && p.re.test(String(tekst)));
   }
 
-  function poPytaniu(stan, postac, tekst, nrPytania){
-    const konfrontacja = wykryjKonfrontacje(tekst, postac);
+  function poPytaniu(obsada, stan, postac, tekst, nrPytania){
+    const konfrontacja = wykryjKonfrontacje(obsada, tekst, postac);
     const bazowe = {...stan.bazowe};
     for(const k of Object.keys(bazowe))                       // pozostali stygną
       if(k !== postac) bazowe[k] = Math.max(0, bazowe[k] - EMOCJE_WAGI.ostyganie);
@@ -587,22 +609,26 @@ Prowadź całość po polsku. Zacznij dopiero po komendzie START.
     return Math.min(1, baza + EMOCJE_WAGI.zegar * Math.min(1, nrPytania / maxQ));
   }
 
-  function emocjaDla(postac, napiecie, konfrontacja){
-    const arc = EMOCJE_ARC[postac];
-    if(!arc) return "neutral";
+  function emocjaDla(obsada, postac, napiecie, konfrontacja){
+    const p = obsada.postacie[postac];
+    if(!p) return "neutral";
     if(konfrontacja) return "zaskoczenie";                     // przyłapanie przebija poziom napięcia
-    const i = EMOCJE_PROGI.findIndex(p => napiecie < p);
-    return arc[i === -1 ? arc.length - 1 : i];
+    const i = EMOCJE_PROGI.findIndex(prog => napiecie < prog);
+    return p.luk[i === -1 ? p.luk.length - 1 : i];
   }
 
-  function plikEmocji(postac, emocja){
-    const p = String(postac || "").toLowerCase();
-    if(!(postac in EMOCJE_ARC)) return null;
-    return emocja === "neutral" ? `img/${p}.png` : `img/emocje/${p}-${emocja}.jpg`;
+  function plikEmocji(obsada, postac, emocja){
+    const p = obsada.postacie[postac];
+    if(!p) return null;
+    return emocja === "neutral"
+      ? `${obsada.katalog}${p.plik}.png`
+      : `${obsada.katalog}emocje/${p.plik}-${emocja}.jpg`;
   }
   // </emocje>
 
-  state.emocje = nowyStanEmocji();
+  // Tymczasowo do Task 6: obsada FENIKSA z bloku scenariuszy.
+  state.obsada = zbudujObsade(SCENARIUSZE.find(s => s.meta.id === "FENIKS").meta);
+  state.emocje = nowyStanEmocji(state.obsada);
 
   // Avatar w panelu pokazuje stan bieżący; portret przy dymku zostaje zamrożony.
   function ustawAvatar(postac, plik){
@@ -659,7 +685,7 @@ Prowadź całość po polsku. Zacznij dopiero po komendzie START.
     // Napięcie rośnie od pytania gracza, nie od odpowiedzi modelu.
     let konfrontacja = false;
     if(opts.count && state.persona){
-      const r = poPytaniu(state.emocje, state.persona, userText, state.questions);
+      const r = poPytaniu(state.obsada, state.emocje, state.persona, userText, state.questions);
       state.emocje = r.stan; konfrontacja = r.konfrontacja;
     }
     state.history.push({role:"user", content:userText});
@@ -669,11 +695,11 @@ Prowadź całość po polsku. Zacznij dopiero po komendzie START.
       const {name, text} = speakerLabel(reply);
       const who = name ? `<b>${name}</b>` : (state.phase === "debrief" ? "<b>Debrief</b>" : "Narrator");
 
-      const mowca = (name in EMOCJE_ARC) ? name : (state.phase === "interview" ? state.persona : null);
+      const mowca = (name in state.obsada.postacie) ? name : (state.phase === "interview" ? state.persona : null);
       let portret = null;
       if(mowca){
-        const emocja = emocjaDla(mowca, napiecieDla(state.emocje, mowca, state.questions, MAX_Q), konfrontacja);
-        portret = plikEmocji(mowca, emocja);
+        const emocja = emocjaDla(state.obsada, mowca, napiecieDla(state.emocje, mowca, state.questions, MAX_Q), konfrontacja);
+        portret = plikEmocji(state.obsada, mowca, emocja);
         ustawAvatar(mowca, portret);
       }
       addMsg("ai", who, text, portret);
