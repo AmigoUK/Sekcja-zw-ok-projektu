@@ -47,6 +47,9 @@ Narzędzie ma architekturę dwuwarstwową, wymuszoną pierwotnie przez limit 8 0
 | 07 | CHŁODNIA — zatrucie w cateringu (PL) | podstawowy | **wiedza branżowa**: postacie wyjaśniają zasady (HACCP, łańcuch chłodniczy), a debrief dodaje „Lekcję branżową” ze źródłami |
 | 08 | SEZAM — alergen w kanapce PPDS (UK) | średni | dowód w wersjach: o przyczynie rozstrzyga porównanie wersji receptury i etykiety |
 | 09 | WYCIEK — naruszenie ochrony danych po phishingu (PL) | średni | iskra ≠ przyczyna w domenie RODO: phishing uruchomił incydent, ale go nie spowodował |
+| 10 | ROZSYŁKA — arkusz zwolnień lekarskich do całej firmy (UK) | wprowadzający | wejście w RODO: 3 postacie, 20 pytań; błąd jednej osoby jako objaw braków systemowych (minimalizacja, zabezpieczenia poczty, presja, 72 h) |
+| 11 | LISTERIA — wycofanie parówek z zakładu mięsnego (PL) | zaawansowany | **dane, które kłamią**: „0 dodatnich od maja” to efekt zmiany metody pobierania, nie poprawy higieny; trend ważniejszy niż pojedynczy wynik |
+| 12 | KUPON — aplikacja lojalnościowa sieci pizzerii (PL) | zaawansowany | **rozmyta odpowiedzialność**: administrator i podmiot przetwarzający przerzucają się winą; styk żywności i RODO (alergie jako dane o zdrowiu) |
 
 **Talia modyfikatorów (regrywalność)** — opcjonalna warstwa losowa: jawny kontekst rynkowy (recesja, media, firma na sprzedaż…), niejawne zdarzenie w trakcie śledztwa (anonimowa koperta, wyciek do prasy, skrócenie budżetu pytań…) i niejawny modyfikator jednego świadka (prawnik u boku, wypalenie, nagrywanie rozmowy…). Losowanie jest deterministyczne z liczby podanej przez gracza (AI nie może „oszukiwać"), a zasada nadrzędna brzmi: modyfikatory zmieniają koszt i drogę dotarcia do prawdy, **nigdy samą prawdę** — dzięki czemu wyniki między rozgrywkami pozostają porównywalne.
 

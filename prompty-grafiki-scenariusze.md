@@ -1,6 +1,6 @@
 # Grafiki do scenariuszy branżowych — lista plików i prompty
 
-Uzupełnienie [`prompty-grafiki.md`](prompty-grafiki.md): ten sam styl (polski komiks kryminalny lat 70.), te same uwagi techniczne per generator i ta sama zasada praw autorskich. Tu są postacie nowych spraw (CHŁODNIA, SEZAM, WYCIEK), opcjonalne grafiki dla scenariuszy 02–06 i okładki spraw.
+Uzupełnienie [`prompty-grafiki.md`](prompty-grafiki.md): ten sam styl (polski komiks kryminalny lat 70.), te same uwagi techniczne per generator i ta sama zasada praw autorskich. Tu są postacie spraw branżowych (CHŁODNIA, SEZAM, WYCIEK, ROZSYŁKA, LISTERIA, KUPON), opcjonalne grafiki dla scenariuszy 02–06 i okładki spraw.
 
 Gra działa bez żadnego z tych plików: brak portretu = inicjały na kolorze, brak wariantu emocji = dymek bez obrazka. Można więc dokładać grafiki stopniowo.
 
@@ -184,6 +184,110 @@ Wspólne tło serii: biuro sieci szkół językowych z lat 70. — terminale z z
 
 ---
 
+## ROZSYŁKA 🇬🇧 — `img/rozsylka/`
+
+Wspólne tło serii: biuro firmy logistycznej w Leeds w stylu lat 70. — segregatory, dalekopis, mapa tras ciężarówek na ścianie, mokre okno z widokiem na plac manewrowy.
+
+| Plik | Postać | Strategia | Akcent |
+|---|---|---|---|
+| `weronika.png` | Weronika Sadowska — specjalistka ds. kadr | `zmeczony` | morski |
+| `nigel.png` | Nigel Ashworth — dyrektor operacyjny | `czaruje` | musztardowy |
+| `edyta.png` | Edyta Kamińska — administratorka IT, opiekunka ochrony danych | `unika` | niebieski |
+
+### Weronika Sadowska — kadry (zmęczona, obwinia się)
+**EN:**
+> 1970s Polish crime comic style portrait of a worn-out 34-year-old HR clerk, hair coming loose from a clip, cardigan over a blouse, red-rimmed guilty eyes, one hand pressed to her forehead, an open personnel file and a desk phone off the hook in front of her, office with filing cabinets and rain on the window behind, teal accent, [baza stylu]
+
+**PL:** wyczerpana 34-letnia kadrowa, włosy wysuwające się ze spinki, kardigan na bluzce, zaczerwienione oczy pełne poczucia winy, dłoń przyciśnięta do czoła, przed nią otwarta teczka osobowa i zdjęta słuchawka, za nią szafy na akta i deszcz na szybie.
+
+### Nigel Ashworth — dyrektor operacyjny (czaruje)
+**EN:**
+> 1970s Polish crime comic style portrait of a smooth 52-year-old English operations director, silver swept-back hair, three-piece suit with a loosened tie, disarming confident grin, holding a mug of tea and gesturing reassuringly with the other hand, a large wall map of lorry routes across northern England behind him, mustard yellow accent, [baza stylu]
+
+**PL:** gładki 52-letni angielski dyrektor operacyjny, siwe zaczesane do tyłu włosy, garnitur z kamizelką i poluzowany krawat, rozbrajający pewny siebie uśmiech, w jednej ręce kubek herbaty, drugą uspokajająco gestykuluje, za nim mapa tras ciężarówek po północnej Anglii.
+
+### Edyta Kamińska — IT i ochrona danych (unika)
+**EN:**
+> 1970s Polish crime comic style portrait of a reserved 41-year-old IT administrator, short practical haircut, oversized glasses, polo-neck sweater, eyes fixed on a typed memo she holds up like a shield, a tangle of cables and a green-screen terminal behind her, blue accent, [baza stylu]
+
+**PL:** powściągliwa 41-letnia administratorka IT, krótka praktyczna fryzura, duże okulary, golf, wzrok wbity w maszynopis notatki trzymany przed sobą jak tarcza, za nią plątanina kabli i terminal z zielonym ekranem.
+
+---
+
+## LISTERIA 🇵🇱 — `img/listeria/`
+
+Wspólne tło serii: zakład wędliniarski z lat 70. — białe kafle, nierdzewne przenośniki, wędzarnie, kratki odpływowe w posadzce, ostre światło jarzeniówek i para.
+
+| Plik | Postać | Strategia | Akcent |
+|---|---|---|---|
+| `bogdan.png` | Bogdan Wilczek — prezes, współwłaściciel | `agresywny` | ceglasty |
+| `teresa.png` | Teresa Zawada — kierowniczka jakości (HACCP) | `czaruje` | niebieski |
+| `oskar.png` | Oskar Lipiński — kierownik produkcji | `unika` | musztardowy |
+| `lucyna.png` | Lucyna Grabarczyk — brygadzistka ekipy mycia | `zmeczony` | morski |
+
+### Bogdan Wilczek — prezes (agresywny)
+**EN:**
+> 1970s Polish crime comic style portrait of a burly 60-year-old meat plant owner, grey crew cut, heavy jowls, sheepskin-collared jacket over a white coat, jabbing a finger at the viewer, furious red face, a ledger and a ring of salami sausages on the desk, smokehouse doors behind him, brick red accent, [baza stylu]
+
+**PL:** postawny 60-letni właściciel zakładu mięsnego, siwy jeżyk, ciężkie policzki, kurtka z kożuszkiem narzucona na biały fartuch, wymierza palec w widza, czerwona ze złości twarz, na biurku księga i wianek kiełbasy, za nim drzwi wędzarni.
+
+### Teresa Zawada — jakość (czaruje)
+**EN:**
+> 1970s Polish crime comic style portrait of a poised 46-year-old quality manager, white lab coat over a silk blouse, neat permed hair, reassuring polished smile, holding up a lab report with a big green tick, a wall chart with neat columns of zeros behind her, blue accent, [baza stylu]
+
+**PL:** opanowana 46-letnia kierowniczka jakości, biały fartuch laboratoryjny na jedwabnej bluzce, starannie ułożona trwała, uspokajający wyćwiczony uśmiech, unosi raport z laboratorium z wielkim zielonym „ptaszkiem”, za nią tablica z równymi kolumnami zer.
+
+### Oskar Lipiński — kierownik produkcji (unika)
+**EN:**
+> 1970s Polish crime comic style portrait of a nervous 38-year-old production manager, white hairnet and coat, thin moustache, eyes darting sideways, hands hidden behind his back, a stainless conveyor with a crude riveted metal patch and smeared silicone behind him, mustard yellow accent, [baza stylu]
+
+**PL:** nerwowy 38-letni kierownik produkcji, biała siatka na włosach i fartuch, cienki wąsik, wzrok uciekający w bok, ręce schowane za plecami, za nim nierdzewny przenośnik z prowizoryczną blachą na nitach i rozmazanym silikonem.
+
+### Lucyna Grabarczyk — brygadzistka mycia (zmęczona)
+**EN:**
+> 1970s Polish crime comic style portrait of an exhausted 52-year-old cleaning crew forewoman on a night shift, rubber apron and long gloves, kerchief over her hair, drooping tired eyes, leaning on a pressure washer lance, wet tiled floor with a floor drain and steam behind her, teal accent, [baza stylu]
+
+**PL:** wyczerpana 52-letnia brygadzistka nocnej ekipy mycia, gumowy fartuch i długie rękawice, chustka na włosach, opadające zmęczone powieki, opiera się o lancę myjki ciśnieniowej, za nią mokre kafle z kratką odpływową i para.
+
+---
+
+## KUPON 🇵🇱 — `img/kupon/`
+
+Wspólne tło serii: pizzeria i biuro software house'u w stylu lat 70. — piec opalany drewnem, łopaty do pizzy, karty stałego klienta z pieczątkami, terminal i wydruki z drukarki igłowej.
+
+| Plik | Postać | Strategia | Akcent |
+|---|---|---|---|
+| `leszek.png` | Leszek Bartnik — prezes sieci pizzerii | `czaruje` | musztardowy |
+| `sylwia.png` | Sylwia Olech — kierowniczka marketingu i aplikacji | `unika` | niebieski |
+| `hubert.png` | Hubert Ziętara — szef techniczny software house'u | `agresywny` | ceglasty |
+| `celina.png` | Celina Wawrzyniak — kierowniczka ds. jakości i bezpieczeństwa żywności | `zmeczony` | morski |
+
+### Leszek Bartnik — prezes sieci (czaruje)
+**EN:**
+> 1970s Polish crime comic style portrait of a jovial 49-year-old pizzeria chain owner, open-collar patterned shirt, gold watch, broad salesman's smile, holding a fanned stack of loyalty stamp cards like a winning poker hand, a wood-fired pizza oven and wooden peels behind him, mustard yellow accent, [baza stylu]
+
+**PL:** jowialny 49-letni właściciel sieci pizzerii, rozpięta wzorzysta koszula, złoty zegarek, szeroki uśmiech sprzedawcy, trzyma wachlarz kart stałego klienta z pieczątkami jak wygrywające karty w pokerze, za nim piec opalany drewnem i drewniane łopaty.
+
+### Sylwia Olech — marketing (unika)
+**EN:**
+> 1970s Polish crime comic style portrait of a stylish 32-year-old marketing manager, big hoop earrings, patterned scarf, looking away over her shoulder, clutching a campaign poster rolled into a tube, a corkboard with leaflets reading "PIZZA BEZ GLUTENU" behind her, blue accent, [baza stylu]
+
+**PL:** stylowa 32-letnia kierowniczka marketingu, duże koła w uszach, wzorzysta apaszka, patrzy w bok przez ramię, ściska zrolowany plakat kampanii, za nią tablica korkowa z ulotkami „PIZZA BEZ GLUTENU”.
+
+### Hubert Ziętara — software house (agresywny)
+**EN:**
+> 1970s Polish crime comic style portrait of a combative 37-year-old tech company co-founder, sideburns, leather jacket over a turtleneck, scowling, slamming a thick printed contract onto the desk, a mainframe terminal and stacks of continuous-feed printouts behind him, brick red accent, [baza stylu]
+
+**PL:** zadziorny 37-letni współzałożyciel firmy informatycznej, bokobrody, skórzana kurtka na golfie, zmarszczone brwi, z hukiem rzuca na biurko grubą wydrukowaną umowę, za nim terminal i stosy wydruków z papieru składanki.
+
+### Celina Wawrzyniak — jakość i bezpieczeństwo żywności (zmęczona)
+**EN:**
+> 1970s Polish crime comic style portrait of a weary 44-year-old food safety manager, white coat and hairnet, reading glasses pushed up on her head, tired resigned eyes, holding an allergen chart with crossed-out rows, a pizzeria prep kitchen with ingredient tubs behind her, teal accent, [baza stylu]
+
+**PL:** znużona 44-letnia kierowniczka ds. bezpieczeństwa żywności, biały fartuch i czepek, okulary do czytania podsunięte na głowę, zmęczony zrezygnowany wzrok, trzyma tabelę alergenów z przekreślonymi wierszami, za nią kuchnia pizzerii z pojemnikami składników.
+
+---
+
 ## Okładki spraw (opcjonalnie)
 
 Gra ich teraz nie wyświetla. Są przydatne do kart spraw w przyszłości i do udostępniania w social media. Wzór jak okładka FENIKSA w `prompty-grafiki.md`.
@@ -232,6 +336,9 @@ Postacie istniejących scenariuszy grają dziś z inicjałami. Poniżej krótkie
 | CHŁODNIA | 4 | 13 | 20 | 1 |
 | SEZAM | 4 | 14 | 20 | 1 |
 | WYCIEK | 4 | 14 | 20 | 1 |
+| ROZSYŁKA | 3 | 10 | 15 | 1 |
+| LISTERIA | 4 | 13 | 20 | 1 |
+| KUPON | 4 | 13 | 20 | 1 |
 | Scenariusze 02–06 (etap 2) | 19 | wg strategii | 95 | 5 (wg wzoru) |
 
-Kolejność pracy: portrety trzech nowych spraw → emocje wymagane → okładki → etap 2.
+Kolejność pracy: portrety spraw branżowych → emocje wymagane → okładki → etap 2.

@@ -32,7 +32,7 @@ Grafiki w repozytorium są przeskalowane pod web. Oryginały 1254×1254 nie są 
 
 ## Scenariusze
 
-Gra ma bibliotekę spraw, pogrupowaną na ekranie startowym według domen: 📁 Projekty (BILBORD, FENIKS, BLACKOUT, NOVA, PRZEJĘCIE, KONSORCJUM), 🍽️ Bezpieczeństwo żywności (CHŁODNIA 🇵🇱, SEZAM 🇬🇧), 🔐 Dane i RODO (WYCIEK 🇵🇱). Ostatni wybór pamięta `localStorage`, a link z wyzwaniem blokuje sprawę na tę z pojedynku.
+Gra ma bibliotekę spraw, pogrupowaną na ekranie startowym według domen: 📁 Projekty (BILBORD, FENIKS, BLACKOUT, NOVA, PRZEJĘCIE, KONSORCJUM), 🍽️ Bezpieczeństwo żywności (CHŁODNIA 🇵🇱, SEZAM 🇬🇧, LISTERIA 🇵🇱), 🔐 Dane i RODO (ROZSYŁKA 🇬🇧, WYCIEK 🇵🇱, KUPON 🇵🇱). Ostatni wybór pamięta `localStorage`, a link z wyzwaniem blokuje sprawę na tę z pojedynku.
 
 Jak dodać sprawę:
 
