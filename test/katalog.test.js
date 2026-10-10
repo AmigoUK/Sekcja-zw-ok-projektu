@@ -15,7 +15,7 @@ assert.ok(blok, "nie znaleziono bloku // <katalog> … // </katalog> w sekcja-zw
 const ctx = vm.createContext({});
 vm.runInContext(blok[1] + `
   globalThis.API = { DOMENY_UI, FLAGI, grupujScenariusze, wybierzStartowy,
-                     rozpoznajMowce, pierwszeZdanie, kropkiPoziomu };
+                     rozpoznajMowce, pierwszeZdanie, kropkiPoziomu, krotkiTytul };
 `, ctx);
 const K = ctx.API;
 
@@ -104,4 +104,46 @@ test("rozpoznajMowce: etykieta z markupem jest surowa, a who ją escapuje", () =
 test("showLeaderboard nigdy nie jest podpięte bezpośrednio jako callback", () => {
   assert.ok(!/addEventListener\("click",\s*showLeaderboard/.test(HTML));
   assert.ok(!/setTimeout\(showLeaderboard/.test(HTML));
+});
+
+test("pierwszeZdanie: skróty i liczebniki porządkowe nie kończą zdania", () => {
+  assert.strictEqual(K.pierwszeZdanie("Platforma e-commerce Domello (meble i AGD, 2. miesiąc po starcie). Drugie zdanie."),
+    "Platforma e-commerce Domello (meble i AGD, 2. miesiąc po starcie).");
+  assert.strictEqual(K.pierwszeZdanie("Sieć szkół językowych „Lingwistrada\" sp. z o.o. (14 szkół) traci dane. Potem było gorzej."),
+    "Sieć szkół językowych „Lingwistrada\" sp. z o.o. (14 szkół) traci dane.");
+  assert.strictEqual(K.pierwszeZdanie("Firma ma 5 tys. zł długu. Nowe zdanie."), "Firma ma 5 tys. zł długu.");
+  assert.strictEqual(K.pierwszeZdanie("Bez kropki na końcu"), "Bez kropki na końcu");
+  assert.strictEqual(K.pierwszeZdanie("Jedno. „Cytat\" drugie."), "Jedno.");
+});
+
+test("pierwszeZdanie: dla każdego scenariusza z katalogu daje pełne zdanie", () => {
+  const { lista } = require("../scripts/build-scenariusze.js").wczytajKatalog();
+  assert.ok(lista.length >= 9);
+  for (const s of lista) {
+    const z = K.pierwszeZdanie(s.tlo);
+    assert.ok(z.length >= 40, `${s.meta.id}: za krótkie: ${z}`);
+    assert.ok(/[.!?]$/.test(z) || z === s.tlo.trim(), `${s.meta.id}: urwane zdanie: ${z}`);
+  }
+});
+
+test("krotkiTytul: część przed „ — ”", () => {
+  assert.strictEqual(K.krotkiTytul("CHLODNIA — zatrucie po przyjęciu"), "CHLODNIA");
+  assert.strictEqual(K.krotkiTytul("  Sam tytuł "), "Sam tytuł");
+  assert.strictEqual(K.krotkiTytul(undefined), "");
+});
+
+test("wybierzStartowy: pusta lista nie wywraca się", () => {
+  assert.deepStrictEqual({ ...K.wybierzStartowy([], {}) }, { id: null, zablokowany: false, komunikat: null });
+  assert.deepStrictEqual({ ...K.wybierzStartowy([], { wyzwanie: "X" }) }, { id: null, zablokowany: false, komunikat: null });
+});
+
+test("initChallenge: po awaicie sprawdza fazę, zanim ruszy ustawSprawe", () => {
+  const m = HTML.match(/async function initChallenge\(\)\{[\s\S]*?\n  \}\n/);
+  assert.ok(m, "nie znaleziono initChallenge");
+  const f = m[0];
+  const iAwait = f.indexOf("await api(");
+  const iGuard = f.indexOf('if(state.phase !== "setup") return;');
+  assert.ok(iAwait > 0 && iGuard > iAwait, "brak straży fazy po await");
+  assert.ok(iGuard < f.indexOf("ustawSprawe("), "straż musi poprzedzać ustawSprawe");
+  assert.ok(iGuard < f.indexOf("state.challenge ="), "straż musi poprzedzać state.challenge");
 });

@@ -34,7 +34,7 @@ Poziom trudności: średni (dowód w wersjach — prawdę ujawnia dopiero zestaw
 
 ## TŁO (znane graczowi)
 
-Polska piekarnia „Złoty Kłos" w Leicester (Anglia; 11 pracowników, piekarnia z kawiarnią przy jednej ulicy) codziennie rano pakuje na miejscu około 120 kanapek, które klienci sami biorą z lodówki przy ladzie — to żywność PPDS (prepacked for direct sale), z etykietą drukowaną w piekarni. W piątek w porze lunchu klientka z alergią na sezam kupiła kanapkę „Wiejską" na bułce z posypką wieloziarnistą; na etykiecie sezamu nie było. Kilkanaście minut później miała ciężką reakcję alergiczną (anafilaksję) i trafiła na A&E; po dwóch dobach wyszła ze szpitala. W poniedziałek piekarnię odwiedził EHO z city council: zabrał etykiety i próbki, poprosił o spec sheets wszystkich składników, zapisy dotyczące alergenów i dokumentację szkoleń. Właścicielka, Grażyna Wójcik, wynajmuje gracza, by ustalił, co naprawdę się stało, zanim odpowie EHO — boi się o klientów, o ocenę higieny wywieszoną w oknie (dziś 5) i o to, czy piekarnia w ogóle się z tego podniesie. Postacie mówią po polsku; nazwy urzędów i dokumentów padają po angielsku (EHO, FSA, PPDS, spec sheet).
+Polska piekarnia „Kłos i Kmin" w Leicester (Anglia; 11 pracowników, piekarnia z kawiarnią przy jednej ulicy) codziennie rano pakuje na miejscu około 120 kanapek, które klienci sami biorą z lodówki przy ladzie — to żywność PPDS (prepacked for direct sale), z etykietą drukowaną w piekarni. W piątek w porze lunchu klientka z alergią na sezam kupiła kanapkę „Wiejską" na bułce z posypką wieloziarnistą; na etykiecie sezamu nie było. Kilkanaście minut później miała ciężką reakcję alergiczną (anafilaksję) i trafiła na A&E; po dwóch dobach wyszła ze szpitala. W poniedziałek piekarnię odwiedził EHO z city council: zabrał etykiety i próbki, poprosił o spec sheets wszystkich składników, zapisy dotyczące alergenów i dokumentację szkoleń. Właścicielka, Grażyna Wójcik, wynajmuje gracza, by ustalił, co naprawdę się stało, zanim odpowie EHO — boi się o klientów, o ocenę higieny wywieszoną w oknie (dziś 5) i o to, czy piekarnia w ogóle się z tego podniesie. Postacie mówią po polsku; nazwy urzędów i dokumentów padają po angielsku (EHO, FSA, PPDS, spec sheet).
 
 ## UKRYTA PRAWDA (nigdy nie ujawniaj spontanicznie)
 
@@ -51,7 +51,7 @@ Polska piekarnia „Złoty Kłos" w Leicester (Anglia; 11 pracowników, piekarni
 
 ## POSTACIE
 
-### 1. Grażyna Wójcik — właścicielka piekarni „Złoty Kłos"
+### 1. Grażyna Wójcik — właścicielka piekarni „Kłos i Kmin"
 - Ton: uprzejma, ale wymijająca; odpowiada ogólnikami („u nas wszystko jest zgodne z przepisami", „mamy piątkę w oknie od lat"), zmienia temat na klientkę i na to, ile piekarnia zrobiła dla polskiej społeczności w Leicester. Pod spodem przerażona i zawstydzona.
 - Narracja: etykiety są zgodne z prawem, alergeny pogrubione, wszyscy przeszkoleni, certyfikaty w segregatorze; osoba z alergią powinna dopytać przy ladzie; jeśli coś się zmieniło, to po stronie dostawcy albo produkcji.
 - Ukrywa: przyczynę 2 (sama zrobiła szablony etykiet w 2021, nikt ich nie aktualizuje, odrzuciła program powiązany z recepturą) i przyczynę 3 (wie, że produkcja słabo zna angielski, a szkolenie było jednorazowe, po angielsku i bez sprawdzenia zrozumienia).

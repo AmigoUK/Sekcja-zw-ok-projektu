@@ -61,6 +61,8 @@ Otwórz `sekcja-zwlok.html` w przeglądarce, wybierz silnik AI, wklej klucz (lub
 
 Ranking ogólny: uruchom `ranking-server.js` i ustaw `RANKING_API` na początku skryptu w `sekcja-zwlok.html`. Wyniki konkretnej sprawy zwraca `GET /api/leaderboard?scenario=ID` (50 najlepszych; bez parametru — ranking ogólny), a modal rankingu w grze ma zakładkę dla każdej sprawy.
 
+> **Uwaga:** grę i serwer rankingu aktualizuj razem. Starszy serwer ignoruje parametr `?scenario=` i w każdej zakładce wylistowałby wyniki ze wszystkich spraw.
+
 ```
 npm install
 SMTP_HOST=smtp.example.com SMTP_PORT=587 SMTP_USER=... SMTP_PASS=... \
@@ -94,7 +96,7 @@ Emocji nie wybiera model. Wynika ona z **kształtu przesłuchania**, bo przeglą
 |---|---|
 | Nacisk — kolejne pytania pod rząd do tej samej osoby | rośnie z każdym pytaniem |
 | Konfrontacja — w pytaniu pada imię innego rozmówcy | skok napięcia i wymuszone zaskoczenie na tę odpowiedź |
-| Zegar śledztwa — postęp do 25 pytań | podnosi napięcie wszystkim |
+| Zegar śledztwa — postęp do limitu pytań sprawy | podnosi napięcie wszystkim |
 | Powrót do porzuconego rozmówcy | dokłada, gdy wracasz po co najmniej dwóch pytaniach do innych |
 
 Pytanie zadane komu innemu pozwala postaci ostygnąć.

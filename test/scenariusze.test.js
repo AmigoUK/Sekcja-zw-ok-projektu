@@ -111,6 +111,11 @@ test("walidator: pierwsza forma odmiany musi być imieniem", () => {
   assert.ok(zPodmiana(m => m.postacie[0].odmiana = ["Haliny", "Halina"]).some(e => /mianownik/.test(e)));
 });
 
+test("walidator: duplikat imienia w jednym scenariuszu", () => {
+  assert.ok(zPodmiana(m => { m.postacie[1].imie = "Halina"; m.postacie[1].odmiana[0] = "Halina"; })
+    .some(e => /duplikat|powtarza/i.test(e)));
+});
+
 test("walidator: kolizja form odmiany między postaciami (bez względu na wielkość liter)", () => {
   assert.ok(zPodmiana(m => m.postacie[1].odmiana.push("halinie")).some(e => /koliz/.test(e)));
 });

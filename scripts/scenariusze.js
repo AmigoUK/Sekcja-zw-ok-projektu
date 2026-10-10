@@ -86,8 +86,13 @@ function walidujScenariusz(meta, tresc, plik) {
   if (postacie.length < 3 || postacie.length > 5) blad(`liczba postaci ${postacie.length} — wymagane 3–5`);
 
   const wlasciciel = new Map();                 // forma (małe litery) → imię postaci
+  const imiona = new Set();
   for (const p of postacie) {
     const kto = p.imie || "?";
+    if (p.imie) {
+      if (imiona.has(p.imie)) blad(`duplikat imienia „${p.imie}" — obsada i rozpoznawanie mówcy kluczują po imieniu`);
+      imiona.add(p.imie);
+    }
     for (const pole of ["imie", "nazwisko", "rola"]) if (!p[pole]) blad(`postać ${kto}: brak pola ${pole}`);
     if (!STRATEGIE.includes(p.strategia)) blad(`postać ${kto}: strategia „${p.strategia}" — dozwolone: ${STRATEGIE.join(", ")}`);
     if (!Array.isArray(p.odmiana) || !p.odmiana.length) { blad(`postać ${kto}: brak listy odmiana`); continue; }
