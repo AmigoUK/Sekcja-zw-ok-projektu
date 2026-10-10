@@ -1,3 +1,33 @@
+---
+id: NOVA
+tytul: "NOVA — upadły startup"
+domena: projekty
+jurysdykcja: UE
+poziom: 4
+pytania: 25
+postacie:
+  - imie: Adam
+    nazwisko: Rylski
+    rola: "CEO i współzałożyciel"
+    strategia: czaruje
+    odmiana: [Adam, Adama, Adamowi, Adamem, Adamie]
+  - imie: Paweł
+    nazwisko: Zieliński
+    rola: "CTO i współzałożyciel"
+    strategia: zgorzknialy
+    odmiana: [Paweł, Pawła, Pawłowi, Pawłem, Pawle]
+  - imie: Joanna
+    nazwisko: Malec
+    rola: "Partnerka funduszu VC"
+    strategia: unika
+    odmiana: [Joanna, Joanny, Joannie, Joannę, Joanną, Joanno]
+  - imie: Karolina
+    nazwisko: Nowak
+    rola: "Head of Sales"
+    strategia: zmeczony
+    odmiana: [Karolina, Karoliny, Karolinie, Karolinę, Karoliną, Karolino]
+---
+
 # SCENARIUSZ 02 — „NOVA" (upadły startup)
 
 Poziom trudności: zaawansowany (więcej emocji, konflikt personalny maskuje przyczyny systemowe) · 4 postacie · 5 przyczyn źródłowych · budżet: 25 pytań

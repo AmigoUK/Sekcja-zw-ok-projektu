@@ -1,3 +1,33 @@
+---
+id: BLACKOUT
+tytul: "BLACKOUT — awaria w Black Friday"
+domena: projekty
+jurysdykcja: UE
+poziom: 3
+pytania: 25
+postacie:
+  - imie: Krzysztof
+    nazwisko: Bator
+    rola: "Kierownik IT"
+    strategia: unika
+    odmiana: [Krzysztof, Krzysztofa, Krzysztofowi, Krzysztofem, Krzysztofie]
+  - imie: Ania
+    nazwisko: Sroka
+    rola: "Starsza inżynierka SRE"
+    strategia: zgorzknialy
+    odmiana: [Ania, Anię, Anią, Aniu]
+  - imie: Michał
+    nazwisko: Leszczyński
+    rola: "Starszy programista"
+    strategia: zmeczony
+    odmiana: [Michał, Michała, Michałowi, Michałem, Michale]
+  - imie: Renata
+    nazwisko: Cichoń
+    rola: "Dyrektorka e-commerce"
+    strategia: agresywny
+    odmiana: [Renata, Renaty, Renacie, Renatę, Renatą, Renato]
+---
+
 # SCENARIUSZ 04 — „BLACKOUT" (awaria produkcyjna w Black Friday)
 
 Poziom trudności: średni (techniczny kontekst, łańcuch przyczyn dłuższy niż w FENIKSIE; kozłem ofiarnym jest niewinna osoba) · 4 postacie · 5 przyczyn źródłowych · budżet: 25 pytań

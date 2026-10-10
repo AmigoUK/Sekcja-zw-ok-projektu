@@ -1,3 +1,28 @@
+---
+id: BILBORD
+tytul: "BILBORD — wtopa kampanii"
+domena: projekty
+jurysdykcja: UE
+poziom: 1
+pytania: 20
+postacie:
+  - imie: Magda
+    nazwisko: Sosnowska
+    rola: "Brand Manager (Sokovia)"
+    strategia: agresywny
+    odmiana: [Magda, Magdy, Magdzie, Magdę, Magdą, Magdo]
+  - imie: Filip
+    nazwisko: Gajda
+    rola: "Account Manager (Karmazyn)"
+    strategia: unika
+    odmiana: [Filip, Filipa, Filipowi, Filipem, Filipie]
+  - imie: Ola
+    nazwisko: Wierzbicka
+    rola: "Creative Director (Karmazyn)"
+    strategia: czaruje
+    odmiana: [Ola, Oli, Olę, Olą, Olu]
+---
+
 # SCENARIUSZ 03 — „BILBORD" (wtopa kampanii marketingowej)
 
 Poziom trudności: wprowadzający (3 postacie, krótsze łańcuchy przyczyn, postacie ustępują po pierwszym trafnym pytaniu) · 3 postacie · 4 przyczyny źródłowe · budżet: 20 pytań

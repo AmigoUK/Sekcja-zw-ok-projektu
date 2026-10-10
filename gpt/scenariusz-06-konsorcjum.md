@@ -1,3 +1,38 @@
+---
+id: KONSORCJUM
+tytul: "KONSORCJUM — zamrożony projekt publiczny"
+domena: projekty
+jurysdykcja: UE
+poziom: 5
+pytania: 30
+postacie:
+  - imie: Artur
+    nazwisko: Sikora
+    rola: "PM Sigmexu"
+    strategia: czaruje
+    odmiana: [Artur, Artura, Arturowi, Arturem, Arturze]
+  - imie: Daniel
+    nazwisko: Krupa
+    rola: "Dyrektor IT MedRegio"
+    strategia: agresywny
+    odmiana: [Daniel, Daniela, Danielowi, Danielem, Danielu]
+  - imie: Marta
+    nazwisko: Zawisza
+    rola: "Była PM Sigmexu"
+    strategia: zgorzknialy
+    odmiana: [Marta, Marty, Marcie, Martę, Martą, Marto]
+  - imie: Iga
+    nazwisko: Halicka
+    rola: "Radczyni prawna Sigmexu"
+    strategia: unika
+    odmiana: [Iga, Igi, Idze, Igę, Igą, Igo]
+  - imie: Beniamin
+    nazwisko: Orski
+    rola: "Audytor bezpieczeństwa"
+    strategia: unika
+    odmiana: [Beniamin, Beniamina, Beniaminowi, Beniaminem, Beniaminie]
+---
+
 # SCENARIUSZ 06 — „KONSORCJUM" (zamrożony projekt publiczny)
 
 Poziom trudności: ekspercki (5 postaci, 6 przyczyn, ZMOWA dwóch świadków — ich zeznania wzajemnie się potwierdzają; spójność ≠ prawda) · 5 postaci · 6 przyczyn źródłowych · budżet: 30 pytań

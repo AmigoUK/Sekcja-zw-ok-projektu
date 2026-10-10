@@ -1,3 +1,33 @@
+---
+id: PRZEJECIE
+tytul: "PRZEJĘCIE — exodus po akwizycji"
+domena: projekty
+jurysdykcja: UE
+poziom: 4
+pytania: 25
+postacie:
+  - imie: Robert
+    nazwisko: Maj
+    rola: "Dyrektor integracji (Argenta)"
+    strategia: unika
+    odmiana: [Robert, Roberta, Robertowi, Robertem, Robercie]
+  - imie: Szymon
+    nazwisko: Brzozowski
+    rola: "Founder Brzozy Digital"
+    strategia: czaruje
+    odmiana: [Szymon, Szymona, Szymonowi, Szymonem, Szymonie]
+  - imie: Ewa
+    nazwisko: Lange
+    rola: "HR Business Partner (Argenta)"
+    strategia: unika
+    odmiana: [Ewa, Ewy, Ewie, Ewę, Ewą, Ewo]
+  - imie: Natalia
+    nazwisko: Wrona
+    rola: "Była lead inżynierka Brzozy"
+    strategia: zgorzknialy
+    odmiana: [Natalia, Natalii, Natalię, Natalią, Natalio]
+---
+
 # SCENARIUSZ 05 — „PRZEJĘCIE" (nieudana integracja po akwizycji)
 
 Poziom trudności: zaawansowany (świadek zewnętrzny miesza prawdę z przesadą — gracz musi filtrować emocje; konflikt interesów wokół earn-outu) · 4 postacie · 5 przyczyn źródłowych · budżet: 25 pytań

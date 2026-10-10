@@ -2,6 +2,8 @@
 
 Skopiuj ten plik jako „scenariusz-NN-nazwa.md", wypełnij i dodaj do plików wiedzy GPT. Silnik automatycznie doda go do listy po komendzie START.
 
+Plik zaczyna się blokiem metadanych (patrz niżej) — z niego gra buduje listę spraw, panel rozmówców i mimikę. Po zmianie metadanych uruchom `npm run build`, a `npm test` sprawdzi poprawność. Lista `odmiana` musi zaczynać się od mianownika i nie może zawierać form, które są zwykłymi słowami (np. „Ani”).
+
 Wskazówki projektowe (sprawdzone w iteracjach):
 - 4 postacie i 4–6 przyczyn źródłowych to optimum na budżet 25 pytań.
 - Każda przyczyna powinna być ukryta u konkretnej postaci i mieć jasny warunek odblokowania.
@@ -10,6 +12,21 @@ Wskazówki projektowe (sprawdzone w iteracjach):
 - Fałszywe tropy pisz tak, by brzmiały jak sensowne przyczyny; każdy powinien być skutkiem lub półprawdą.
 - Niczego z ukrytej prawdy nie umieszczaj w sekcji TŁO.
 
+---
+
+---
+id: NAZWA
+tytul: "NAZWA — jedno zdanie o typie porażki"
+domena: projekty        # projekty | zywnosc | rodo
+jurysdykcja: UE         # PL | UK | UE
+poziom: 2               # 1 wprowadzający … 5 ekspercki
+pytania: 25
+postacie:
+  - imie: Imię
+    nazwisko: Nazwisko
+    rola: "Rola, organizacja"
+    strategia: unika    # unika | czaruje | zgorzknialy | zmeczony | agresywny
+    odmiana: [Imię, Imienia, Imieniu, Imieniem]
 ---
 
 # SCENARIUSZ NN — „NAZWA" (jedno zdanie o typie porażki)
@@ -43,6 +60,7 @@ Poziom trudności: podstawowy / zaawansowany · liczba postaci · liczba przyczy
 - Sam(a) z siebie ujawnia (opcjonalnie): [dowód/trop, który daje graczowi amunicję na inną postać — element konfrontacji krzyżowej].
 - Warunki odblokowania: [przyznaje się TYLKO gdy… — konkretne pytanie, prośba o dokument lub konfrontacja z zeznaniem innej postaci; opisz też pierwszą reakcję obronną przed ustąpieniem].
 - Częściowo ma rację: [w czym ta postać mówi prawdę].
+- Wiedza branżowa (opcjonalnie, scenariusze branżowe): [zasada, którą postać wyjaśnia zapytana wprost — z liczbami zgodnymi ze źródłem w ZASADACH DO DEBRIEFU].
 
 ### 2. [Imię Nazwisko] — [rola]
 [jak wyżej]
@@ -52,6 +70,10 @@ Poziom trudności: podstawowy / zaawansowany · liczba postaci · liczba przyczy
 
 ### 4. [Imię Nazwisko] — [rola]
 [jak wyżej]
+
+## ZASADY DO DEBRIEFU (scenariusze branżowe)
+
+- [ETYKIETA-PRZYCZYNY] [Zasada, która została naruszona.] Źródło: [akt prawny / wytyczna urzędu, artykuł lub rozdział, link].
 
 ## UWAGI DO DEBRIEFU (opcjonalnie)
 

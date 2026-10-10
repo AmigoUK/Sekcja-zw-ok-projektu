@@ -146,3 +146,39 @@ test("sortujKatalog: domena, potem poziom, potem id", () => {
   ];
   assert.deepStrictEqual(S.sortujKatalog(l).map(s => s.meta.id), ["D", "A", "C", "B"]);
 });
+
+// ---------- scenariusze w repozytorium ----------
+const fs = require("node:fs");
+const path = require("node:path");
+const GPT = path.join(__dirname, "..", "gpt");
+
+test("repo: każdy gpt/scenariusz-*.md ma poprawne metadane", () => {
+  const pliki = fs.readdirSync(GPT).filter(f => /^scenariusz-\d+-.+\.md$/.test(f));
+  assert.ok(pliki.length >= 6);
+  const metas = [], bledy = [];
+  for (const f of pliki) {
+    const { meta, tresc } = S.parsujFrontMatter(fs.readFileSync(path.join(GPT, f), "utf-8"));
+    bledy.push(...S.walidujScenariusz(meta, tresc, f));
+    metas.push(meta);
+  }
+  bledy.push(...S.walidujKatalog(metas));
+  assert.deepStrictEqual(bledy, []);
+});
+
+test("repo: FENIKS zachowuje id i obsadę sprzed wielu spraw", () => {
+  const { meta } = S.parsujFrontMatter(fs.readFileSync(path.join(GPT, "scenariusz-01-feniks.md"), "utf-8"));
+  assert.strictEqual(meta.id, "FENIKS");
+  assert.deepStrictEqual(meta.postacie.map(p => [p.imie, p.strategia]),
+    [["Marek", "unika"], ["Beata", "czaruje"], ["Tomek", "zgorzknialy"], ["Iwona", "zmeczony"]]);
+});
+
+test("repo: silnik gry istnieje i nie zawiera treści FENIKSA", () => {
+  const s = fs.readFileSync(path.join(GPT, "silnik-gra.md"), "utf-8");
+  assert.match(s, /WYNIK: X\/100/);
+  assert.doesNotMatch(s, /Codaris|Logistra|Magnat/);
+});
+
+test("repo: master prompt Custom GPT mieści się w limicie 8000 znaków", () => {
+  const s = fs.readFileSync(path.join(GPT, "gpt-master-prompt.md"), "utf-8");
+  assert.ok(s.length < 8000, `ma ${s.length} znaków`);
+});

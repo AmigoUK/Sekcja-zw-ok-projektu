@@ -1,3 +1,33 @@
+---
+id: FENIKS
+tytul: "FENIKS — upadłe wdrożenie ERP"
+domena: projekty
+jurysdykcja: UE
+poziom: 2
+pytania: 25
+postacie:
+  - imie: Marek
+    nazwisko: Zawada
+    rola: "Project Manager"
+    strategia: unika
+    odmiana: [Marek, Marka, Markowi, Markiem, Marku]
+  - imie: Beata
+    nazwisko: Krajewska
+    rola: "Account Manager"
+    strategia: czaruje
+    odmiana: [Beata, Beaty, Beatę, Beatą, Beato, Beacie]
+  - imie: Tomek
+    nazwisko: Wilk
+    rola: "Tech Lead"
+    strategia: zgorzknialy
+    odmiana: [Tomek, Tomka, Tomkowi, Tomkiem, Tomku]
+  - imie: Iwona
+    nazwisko: Stachura
+    rola: "PM klienta (Logistra)"
+    strategia: zmeczony
+    odmiana: [Iwona, Iwony, Iwonie, Iwonę, Iwoną, Iwono]
+---
+
 # SCENARIUSZ 01 — „FENIKS" (upadłe wdrożenie IT)
 
 Poziom trudności: podstawowy · 4 postacie · 5 przyczyn źródłowych · budżet: 25 pytań
