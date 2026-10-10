@@ -7,7 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-_Nothing yet._
+### Added
+- `npm run grafiki -- <katalog>` — import grafik postaci z luźno nazwanych plików (np. „CHŁODNIA - Ryszard - złość.png”): rozpoznanie sprawy, postaci i emocji, przycięcie i skalowanie do formatów gry; `--stan` pokazuje brakujące wymagane grafiki.
 
 ## [1.1.0] — 2026-10-10
 

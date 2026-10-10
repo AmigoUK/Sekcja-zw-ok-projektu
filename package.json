@@ -20,6 +20,7 @@
     "start": "node ranking-server.js",
     "build": "node scripts/build-scenariusze.js",
     "deck": "node deck.js",
+    "grafiki": "node scripts/importuj-grafiki.js",
     "test": "node --test test/*.test.js"
   },
   "dependencies": {

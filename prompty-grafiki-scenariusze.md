@@ -16,6 +16,17 @@ Gra działa bez żadnego z tych plików: brak portretu = inicjały na kolorze, b
 
 FENIKS zostaje w dotychczasowych ścieżkach (`img/marek.png`, `img/emocje/marek-zlosc.jpg` itd.).
 
+## Import do gry
+
+Nie musisz nazywać plików dokładnie według tabeli. Wrzuć wszystko do jednego katalogu (podkatalogi wolno) i uruchom:
+
+```
+npm run grafiki -- ~/Pobrane/grafiki
+npm run grafiki -- --stan        # co jeszcze brakuje
+```
+
+Nazwa pliku musi zawierać sprawę i imię, a dla wariantu — emocję (po polsku lub po angielsku: `anger`, `surprised`, `sad`, `happy`, `resigned`). Bez emocji = portret; słowo `okladka`/`cover` = okładka. Przykłady: `CHŁODNIA - Ryszard.png`, `chlodnia_ryszard_złość.png`, `sezam/grazyna-surprised.jpg`, `wyciek okladka.webp`. Skrypt przycina do środka, skaluje (portret 384², emocja 768², okładka 682×1024) i zapisuje pod ścieżką, której szuka gra. Nazw niejednoznacznych nie zgaduje — wypisuje je z powodem.
+
 ## Które emocje są naprawdę potrzebne
 
 Gra pokazuje tylko emocje z łuku strategii postaci oraz `zaskoczenie` (każda konfrontacja). Reszta jest zapasem na wypadek zmiany strategii — dorabiaj ją, jeśli generujesz w jednej sesji i to nic nie kosztuje.

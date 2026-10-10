@@ -53,7 +53,7 @@ Jak dodać sprawę:
 
 **Źródła w scenariuszach branżowych.** Sekcja `ZASADY DO DEBRIEFU` przypisuje każdej przyczynie regułę wraz ze źródłem (akt prawny lub wytyczna urzędu, z linkiem). Debrief pokazuje je jako nieoceniany blok „Lekcja branżowa” — bez wpływu na punktację. Reguł nie wolno pisać z pamięci.
 
-**Grafiki.** Portrety: `img/<slug(id)>/<slug(imię)>.png`, mimika: `img/<slug(id)>/emocje/<slug>-<emocja>.jpg` (slug = małe litery bez polskich znaków; FENIKS zachowuje stare ścieżki `img/*.png` i `img/emocje/*`). Brak pliku = fallback do inicjałów. Lista plików i prompty: [`prompty-grafiki-scenariusze.md`](prompty-grafiki-scenariusze.md).
+**Grafiki.** Portrety: `img/<slug(id)>/<slug(imię)>.png`, mimika: `img/<slug(id)>/emocje/<slug>-<emocja>.jpg` (slug = małe litery bez polskich znaków; FENIKS zachowuje stare ścieżki `img/*.png` i `img/emocje/*`). Brak pliku = fallback do inicjałów. Lista plików i prompty: [`prompty-grafiki-scenariusze.md`](prompty-grafiki-scenariusze.md). Wygenerowane obrazy wrzuć do dowolnego katalogu i uruchom `npm run grafiki -- <katalog>` — skrypt rozpozna sprawę, postać i emocję z nazwy pliku, przytnie, przeskaluje i zapisze pod właściwą ścieżką; `npm run grafiki -- --stan` pokazuje, czego brakuje (wymaga ImageMagick).
 
 ## Szybki start
 
