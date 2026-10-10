@@ -1,6 +1,6 @@
 # „Sekcja zwłok projektu" — koncept narzędzia edukacyjnego
 
-*Interaktywna gra narracyjna ucząca prowadzenia post-mortem, analizy przyczyn źródłowych i odróżniania faktów od narracji. Dziewięć scenariuszy (sześć projektowych, trzy branżowe) na kilku poziomach trudności + talia losowych modyfikatorów.*
+*Interaktywna gra narracyjna ucząca prowadzenia post-mortem, analizy przyczyn źródłowych i odróżniania faktów od narracji. Osiemnaście scenariuszy (sześć projektowych, dwanaście branżowych w trzech domenach) na kilku poziomach trudności + talia losowych modyfikatorów.*
 
 ---
 
@@ -53,6 +53,9 @@ Narzędzie ma architekturę dwuwarstwową, wymuszoną pierwotnie przez limit 8 0
 | 13 | REGAŁ — paleta spadła na kompletującą (PL) | podstawowy | **wejście w BHP**: wypadek przy pracy jako skutek organizacji pracy (drogi dla pieszych, normy wydajności, instruktaż, przeglądy regałów), nie „nieuwagi operatora” |
 | 14 | RUSZTOWANIE — upadek z wysokości na budowie (UK) | średni | **rozmyta odpowiedzialność na budowie**: generalny wykonawca, podwykonawca i firma rusztowaniowa — kto mógł zmienić rusztowanie i kto miał zatrzymać pracę |
 | 15 | BLOKADA — porażenie serwisanta przy prasie (PL) | zaawansowany | **procedura na papierze**: LOTO „mamy”, ale jedna kłódka na zmianę; 5 postaci, dwóch pracodawców (art. 208 KP), sygnały ostrzegawcze zamiecione pod dywan |
+| 16 | MENU — nerkowce w daniu oznaczonym w aplikacji „bez orzechów” (UK) | wprowadzający | **wejście w żywność**: dwa źródła prawdy o alergenach (matryca i menu cyfrowe), zmiana dostawcy bez przeglądu, „nie wiem → sprawdzam” zamiast zgadywania |
+| 17 | WRZĄTEK — kucharka poparzona przy kotle w stołówce zakładowej (PL) | wprowadzający | **BHP od podstaw**: zgłaszana usterka, ocena ryzyka nieaktualna po wymianie sprzętu, środki ochrony wstrzymane „do budżetu” |
+| 18 | CHMURA — publiczny zasobnik z CV u dostawcy SaaS rekrutacji (PL) | ekspercki | **łańcuch procesorów**: 5 postaci, sprzeczne zeznania rozstrzygane dokumentami; dane produkcyjne na testach, podprocesor AI w USA bez zgody, DPIA, zwłoka w zgłoszeniu, audyty na papierze |
 
 **Talia modyfikatorów (regrywalność)** — opcjonalna warstwa losowa: jawny kontekst rynkowy (recesja, media, firma na sprzedaż…), niejawne zdarzenie w trakcie śledztwa (anonimowa koperta, wyciek do prasy, skrócenie budżetu pytań…) i niejawny modyfikator jednego świadka (prawnik u boku, wypalenie, nagrywanie rozmowy…). Losowanie jest deterministyczne z liczby podanej przez gracza (AI nie może „oszukiwać"), a zasada nadrzędna brzmi: modyfikatory zmieniają koszt i drogę dotarcia do prawdy, **nigdy samą prawdę** — dzięki czemu wyniki między rozgrywkami pozostają porównywalne.
 

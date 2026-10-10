@@ -406,6 +406,110 @@ Wspólne tło serii: tłocznia z lat 70. — rzędy pras hydraulicznych, szafy s
 
 ---
 
+## MENU 🇬🇧 — `img/menu/`
+
+Wspólne tło serii: angielskie bistro z brunchem w stylu lat 70. — drewniane stoliki z kodami QR na tabliczkach, tablica z menu kredą, ekspres do kawy, gwarna sala w sobotni poranek, deszcz na witrynie.
+
+| Plik | Postać | Strategia | Akcent |
+|---|---|---|---|
+| `hanna.png` | Hanna Wilczyńska — kierowniczka zakupów i operacji sieci | `czaruje` | musztardowy |
+| `seweryn.png` | Seweryn Kołodziej — kierownik bistro przy Market Street | `zgorzknialy` | fioletowy |
+| `ethan.png` | Ethan Briggs — kelner, obsługa sali | `agresywny` | ceglasty |
+
+### Hanna Wilczyńska — kierowniczka zakupów i operacji (czaruje)
+**EN:**
+> 1970s Polish crime comic style portrait of a warm 46-year-old Polish operations manager of a bistro chain in England, polished bob haircut, tailored blazer with a small brooch, radiant welcoming smile, holding a tablet that shows a glossy allergen filter screen, a stack of supplier price lists on the table beside her, mustard yellow accent, [baza stylu]
+
+**PL:** ciepła 46-letnia polska kierowniczka operacji sieci bistro w Anglii, wypielęgnowany bob, dopasowana marynarka z drobną broszką, promienny gościnny uśmiech, trzyma tablet z błyszczącym ekranem filtra alergenów, obok na stole stos cenników dostawców.
+
+### Seweryn Kołodziej — kierownik bistro (zgorzkniały)
+**EN:**
+> 1970s Polish crime comic style portrait of a bitter 43-year-old Polish bistro manager, stained apron over a rolled-sleeve shirt, tea towel on his shoulder, arms crossed, sardonic crooked smirk, a bucket of green sauce and a battered ring binder on the pass behind him, purple accent, [baza stylu]
+
+**PL:** zgorzkniały 43-letni polski kierownik bistro, poplamiony fartuch na koszuli z podwiniętymi rękawami, ścierka na ramieniu, skrzyżowane ręce, ironiczny krzywy uśmieszek, za nim na podajniku wiaderko z zieloną pastą i sfatygowany segregator.
+
+### Ethan Briggs — kelner (agresywny)
+**EN:**
+> 1970s Polish crime comic style portrait of a defensive 19-year-old English waiter, floppy fringe, black waistcoat and white shirt, a plate in one hand and the other jabbing a finger at the viewer, loud indignant expression, crowded brunch tables with a queue by the door behind him, brick red accent, [baza stylu]
+
+**PL:** zadziorny 19-letni angielski kelner, opadająca grzywka, czarna kamizelka i biała koszula, w jednej ręce talerz, drugą wskazuje oskarżycielsko na widza, głośny oburzony wyraz twarzy, za nim zatłoczone stoliki brunchu i kolejka przy drzwiach.
+
+---
+
+## WRZĄTEK 🇵🇱 — `img/wrzatek/`
+
+Wspólne tło serii: stołówka zakładowa fabryki okuć w stylu lat 70. — duży kocioł warzelny z parą, aluminiowe garnki, kafelkowe ściany, okienko wydawcze, kolejka robotników w roboczych kombinezonach.
+
+| Plik | Postać | Strategia | Akcent |
+|---|---|---|---|
+| `bozena.png` | Bożena Chmielarz — kierowniczka kuchni stołówki zakładowej | `zmeczony` | morski |
+| `kazimierz.png` | Kazimierz Gołąbek — kierownik działu administracyjno-gospodarczego | `agresywny` | ceglasty |
+| `paulina.png` | Paulina Lisowska — specjalistka ds. BHP | `unika` | niebieski |
+
+### Bożena Chmielarz — kierowniczka kuchni (zmęczona)
+**EN:**
+> 1970s Polish crime comic style portrait of an exhausted 52-year-old canteen kitchen manager, white cook's coat and headscarf, flushed face, strands of grey hair stuck to her forehead, a stained cloth in her hand and a worn notebook tucked under her arm, tired apologetic eyes, a steaming kettle and a row of pots behind her, teal accent, [baza stylu]
+
+**PL:** wyczerpana 52-letnia kierowniczka kuchni stołówki, biała bluza kucharska i chustka na głowie, zaczerwieniona twarz, kosmyki siwych włosów przyklejone do czoła, w dłoni poplamiona ścierka, pod pachą sfatygowany zeszyt, zmęczone przepraszające oczy, za nią parujący kocioł i rząd garnków.
+
+### Kazimierz Gołąbek — kierownik administracyjno-gospodarczy (agresywny)
+**EN:**
+> 1970s Polish crime comic style portrait of a bullying 55-year-old administrative manager, stocky, brown suit with a loosened tie, pointing a thick finger at the viewer, shouting expression, an abacus and a pile of invoices on his desk, a window onto the canteen behind him, brick red accent, [baza stylu]
+
+**PL:** zastraszający 55-letni kierownik administracyjno-gospodarczy, krępy, brązowy garnitur z poluzowanym krawatem, grubym palcem wskazuje widza, krzyczący wyraz twarzy, na biurku liczydło i sterta faktur, za nim okno z widokiem na stołówkę.
+
+### Paulina Lisowska — specjalistka ds. BHP (unika)
+**EN:**
+> 1970s Polish crime comic style portrait of a reserved 38-year-old safety specialist, neat dark bob, white hard hat and a cardigan, hugging a folder of stamped documents to her chest, polite stiff smile with eyes turned aside, a framed occupational risk chart and a first-aid cabinet on the wall behind her, blue accent, [baza stylu]
+
+**PL:** powściągliwa 38-letnia specjalistka BHP, schludny ciemny bob, biały kask i sweter, przyciska do piersi teczkę z opieczętowanymi dokumentami, uprzejmy sztywny uśmiech i wzrok odwrócony w bok, za nią oprawiona tabela ryzyka zawodowego i apteczka na ścianie.
+
+---
+
+## CHMURA 🇵🇱 — `img/chmura/`
+
+Wspólne tło serii: biuro startupu SaaS we Wrocławiu w stylu lat 70. — open space z dużymi monitorami, szafy serwerowe za szybą, tablica z wykresami sprzedaży, kubki po kawie, ciężkie jesienne niebo za oknem.
+
+| Plik | Postać | Strategia | Akcent |
+|---|---|---|---|
+| `maciej.png` | Maciej Lorenc — prezes zarządu i współzałożyciel Naborix | `czaruje` | musztardowy |
+| `tymon.png` | Tymon Kwiatek — dyrektor techniczny (CTO) | `agresywny` | ceglasty |
+| `zuzanna.png` | Zuzanna Rydel — inspektorka ochrony danych i specjalistka ds. umów | `zgorzknialy` | fioletowy |
+| `lucja.png` | Łucja Brandys — kierowniczka produktu „Dopasowanie AI" | `unika` | niebieski |
+| `igor.png` | Igor Sawko — inżynier DevOps | `zmeczony` | morski |
+
+### Maciej Lorenc — prezes zarządu (czaruje)
+**EN:**
+> 1970s Polish crime comic style portrait of a charismatic 42-year-old startup CEO, slim-cut suit without a tie, open collar, expansive reassuring smile, one hand spread in a welcoming gesture, a glossy pitch-deck slide with "trust" and rising arrows on a screen behind him, mustard yellow accent, [baza stylu]
+
+**PL:** charyzmatyczny 42-letni prezes startupu, dopasowany garnitur bez krawata, rozpięty kołnierzyk, szeroki uspokajający uśmiech, jedna dłoń otwarta w geście powitania, za nim na ekranie błyszczący slajd prezentacji ze słowem „zaufanie" i strzałkami w górę.
+
+### Tymon Kwiatek — dyrektor techniczny (agresywny)
+**EN:**
+> 1970s Polish crime comic style portrait of an arrogant 40-year-old chief technology officer, black hoodie under a blazer, beard stubble, leaning in with a condescending glare, a mug in one fist, a whiteboard scrawled with a cloud architecture diagram and cables behind him, brick red accent, [baza stylu]
+
+**PL:** arogancki 40-letni dyrektor techniczny, czarna bluza pod marynarką, zarost, pochylony do przodu z protekcjonalnym spojrzeniem, w pięści kubek, za nim tablica zapisana schematem architektury chmury i splątane kable.
+
+### Zuzanna Rydel — inspektorka ochrony danych (zgorzkniała)
+**EN:**
+> 1970s Polish crime comic style portrait of a sardonic 37-year-old data protection officer, sensible cardigan, glasses pushed up into short dark hair, arms folded over a thick folder of dated memos with colourful tabs, bitter dry smile, a cramped desk tucked next to the sales department behind her, purple accent, [baza stylu]
+
+**PL:** sarkastyczna 37-letnia inspektorka ochrony danych, praktyczny sweter, okulary wsunięte w krótkie ciemne włosy, ręce założone na grubej teczce z datowanymi notatkami i kolorowymi zakładkami, gorzki ironiczny uśmiech, za nią ciasne biurko wciśnięte obok działu sprzedaży.
+
+### Łucja Brandys — kierowniczka produktu (unika)
+**EN:**
+> 1970s Polish crime comic style portrait of a smooth, evasive 33-year-old product manager, sleek ponytail, smart blouse with a lanyard badge, a laptop held like a shield against her chest, polite practised smile while her eyes dart aside, sticky notes and a colourful roadmap board behind her, blue accent, [baza stylu]
+
+**PL:** gładka, wymijająca 33-letnia kierowniczka produktu, gładki kucyk, elegancka bluzka z identyfikatorem na smyczy, laptop przyciśnięty do piersi jak tarcza, uprzejmy wyćwiczony uśmiech i uciekający w bok wzrok, za nią karteczki samoprzylepne i kolorowa tablica planu rozwoju produktu.
+
+### Igor Sawko — inżynier DevOps (zmęczony)
+**EN:**
+> 1970s Polish crime comic style portrait of an exhausted 29-year-old DevOps engineer, rumpled t-shirt under an open flannel shirt, dark circles under bloodshot eyes, unkempt hair, headphones around his neck, hands wrapped around a cold coffee, several monitors of scrolling logs glowing behind him in a dim server corner, teal accent, [baza stylu]
+
+**PL:** wyczerpany 29-letni inżynier DevOps, pognieciona koszulka pod rozpiętą flanelową koszulą, sine cienie pod przekrwionymi oczami, rozczochrane włosy, słuchawki na szyi, dłonie owinięte wokół zimnej kawy, za nim w półmroku kilka monitorów z przewijającymi się logami.
+
+---
+
 ## Okładki spraw (opcjonalnie)
 
 Gra ich teraz nie wyświetla. Są przydatne do kart spraw w przyszłości i do udostępniania w social media. Wzór jak okładka FENIKSA w `prompty-grafiki.md`.
@@ -460,6 +564,9 @@ Postacie istniejących scenariuszy grają dziś z inicjałami. Poniżej krótkie
 | REGAŁ | 4 | 14 | 20 | 1 |
 | RUSZTOWANIE | 4 | 13 | 20 | 1 |
 | BLOKADA | 5 | 17 | 25 | 1 |
+| MENU | 3 | 10 | 15 | 1 |
+| WRZĄTEK | 3 | 10 | 15 | 1 |
+| CHMURA | 5 | 17 | 25 | 1 |
 | Scenariusze 02–06 (etap 2) | 19 | wg strategii | 95 | 5 (wg wzoru) |
 
 Kolejność pracy: portrety spraw branżowych → emocje wymagane → okładki → etap 2.
