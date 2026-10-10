@@ -23,8 +23,7 @@
  *                                                                  -> weryfikuje kod, zapisuje wynik,
  *                                                                     zwraca bilet na wyzwanie,
  *                                                                     opcjonalnie rozstrzyga pojedynek
- *   GET  /api/leaderboard                                          -> top 50, e-maile ZAMASKOWANE
- *   GET  /api/leaderboard[?scenario=ID]  → {entries}  (bez parametru: wszystkie sprawy)
+ *   GET  /api/leaderboard[?scenario=ID]  → top 50 {entries}, e-maile ZAMASKOWANE (bez parametru: wszystkie sprawy)
  *   POST /api/challenge           {ticket, targetName, targetEmail} -> wysyła zaproszenie do pojedynku
  *   GET  /api/challenge/:id                                        -> dane wyzwania do wyświetlenia
  *   POST /api/challenge/:id/answer {nick, score}                   -> odpowiedź anonimowa

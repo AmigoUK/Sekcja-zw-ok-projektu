@@ -1017,6 +1017,7 @@
   }
 
   async function showLeaderboard(id = idSprawy()){
+    if(typeof id !== "string") id = idSprawy();
     const zakladki = SCENARIUSZE.map(s =>
       `<button type="button" class="chip${s.meta.id === id ? " on" : ""}" data-rank="${escapeHtml(s.meta.id)}">${escapeHtml(s.meta.id)}</button>`).join(" ");
     openModal("🏆 Ranking śledczych", `<div class="rtabs">${zakladki}</div><div id="rankBody"><p class='muted'>Wczytywanie…</p></div>`);
@@ -1078,7 +1079,7 @@
         if(r.duel){ markDuelAnswered(r.duel, nick); msg += duelResultHtml(r.duel, nick); }
         $("rMsg2").innerHTML = msg;
         if(r.challengeTicket) showChallengeForm(r.challengeTicket);
-        else setTimeout(showLeaderboard, 900);
+        else setTimeout(() => showLeaderboard(), 900);
       }catch(e){ $("rMsg2").innerHTML = `<p class='errmsg'>${escapeHtml(e.message)}</p>`; $("rConfirm").disabled = false; }
     });
   });
@@ -1180,7 +1181,7 @@
         <button class="primary" id="cSend">Wyślij wyzwanie</button>
         <button class="ghost" id="cSkip" style="margin-top:8px">Pomiń — pokaż ranking</button>
         <div id="cMsg"></div>`);
-      $("cSkip").addEventListener("click", showLeaderboard);
+      $("cSkip").addEventListener("click", () => showLeaderboard());
       $("cSend").addEventListener("click", async () => {
         const targetName = $("cName").value.trim(), targetEmail = $("cEmail").value.trim();
         if(targetName.length < 2){ $("cMsg").innerHTML = "<p class='errmsg'>Podaj imię osoby.</p>"; return; }
@@ -1190,7 +1191,7 @@
         try{
           await api("/api/challenge", {ticket, targetName, targetEmail});
           $("cMsg").innerHTML = `<p class='okmsg'>Wyzwanie poszło do ${escapeHtml(targetName)}. 🎯</p>`;
-          setTimeout(showLeaderboard, 1400);
+          setTimeout(() => showLeaderboard(), 1400);
         }catch(e){ $("cMsg").innerHTML = `<p class='errmsg'>${escapeHtml(e.message)}</p>`; $("cSend").disabled = false; }
       });
     }, 700);

@@ -99,3 +99,9 @@ test("rozpoznajMowce: etykieta z markupem jest surowa, a who ją escapuje", () =
   assert.strictEqual(r.etykieta, "<b>x</b>");
   assert.match(HTML, /escapeHtml\(r\.etykieta\)/);
 });
+
+// Każdy wywołujący showLeaderboard owija je w strzałkę — inaczej Event trafiłby jako `id`.
+test("showLeaderboard nigdy nie jest podpięte bezpośrednio jako callback", () => {
+  assert.ok(!/addEventListener\("click",\s*showLeaderboard/.test(HTML));
+  assert.ok(!/setTimeout\(showLeaderboard/.test(HTML));
+});
