@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 _Nothing yet._
 
+## [1.3.0] — 2026-10-10
+
+### Added
+- Nowa domena 🦺 **Bezpieczeństwo pracy** w bibliotece spraw.
+- Trzy sprawy BHP: REGAŁ (🇵🇱 poziom 2 — paleta spadła na kompletującą w centrum dystrybucyjnym), RUSZTOWANIE (🇬🇧 poziom 3 — upadek z wysokości na budowie; WAHR 2005, CDM 2015, RIDDOR), BLOKADA (🇵🇱 poziom 4 — porażenie serwisanta przy prasie; LOTO, art. 208 KP, praca pod napięciem).
+- Prompty grafik dla 13 nowych postaci w `prompty-grafiki-scenariusze.md`.
+
 ## [1.2.1] — 2026-10-10
 
 ### Security
@@ -53,7 +60,8 @@ _Nothing yet._
 - Opcjonalne zapamiętywanie klucza API w pamięci sesyjnej karty.
 - Ranking na SQLite: trwałe kody, bilety i limity.
 
-[Unreleased]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/compare/v1.2.1...HEAD
+[Unreleased]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/compare/v1.2.1...v1.3.0
 [1.2.1]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/compare/v1.0.0...v1.1.0
