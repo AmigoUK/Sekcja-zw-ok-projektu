@@ -739,7 +739,7 @@ Prowadź całość po polsku. Zacznij dopiero po komendzie START.
       state.history.push({role:"assistant", content:reply});
       const r = rozpoznajMowce(reply, Object.keys(state.obsada.postacie));
       const name = r.imie, text = r.tekst;
-      const who = r.etykieta ? `<b>${r.etykieta}</b>` : (state.phase === "debrief" ? "<b>Debrief</b>" : "Narrator");
+      const who = r.etykieta ? `<b>${escapeHtml(r.etykieta)}</b>` : (state.phase === "debrief" ? "<b>Debrief</b>" : "Narrator");
 
       const mowca = (name in state.obsada.postacie) ? name : (state.phase === "interview" ? state.persona : null);
       let portret = null;

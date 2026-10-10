@@ -90,3 +90,12 @@ test("pierwszeZdanie i kropkiPoziomu", () => {
   assert.strictEqual(K.pierwszeZdanie("Bez kropki"), "Bez kropki");
   assert.strictEqual(K.kropkiPoziomu(2), "●●○○○");
 });
+
+// Etykieta mówcy trafia do innerHTML — rozpoznajMowce zwraca ją surową,
+// więc miejsce użycia musi ją escapować.
+test("rozpoznajMowce: etykieta z markupem jest surowa, a who ją escapuje", () => {
+  const r = K.rozpoznajMowce("[<b>x</b>] tekst", ["Grażyna"]);
+  assert.strictEqual(r.imie, null);
+  assert.strictEqual(r.etykieta, "<b>x</b>");
+  assert.match(HTML, /escapeHtml\(r\.etykieta\)/);
+});
