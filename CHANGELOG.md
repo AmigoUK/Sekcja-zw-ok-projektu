@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 _Nothing yet._
 
+## [1.4.0] — 2026-10-10
+
+### Added
+- Trzy sprawy domykające poziomy trudności w domenach branżowych: MENU (🍽️ 🇬🇧 poziom 1 — nerkowce w daniu oznaczonym w aplikacji QR jako „bez orzechów”; FIR 2014 reg. 5, 1169/2011, wytyczne FSA), WRZĄTEK (🦺 🇵🇱 poziom 1 — poparzenie przy kotle warzelnym w stołówce zakładowej; KP, ocena ryzyka, środki ochrony indywidualnej), CHMURA (🔐 🇵🇱 poziom 5, 5 postaci — publiczny zasobnik z CV u procesora SaaS; art. 28, 33, 35, rozdział V RODO).
+- Prompty grafik dla 11 nowych postaci w `prompty-grafiki-scenariusze.md`.
+
 ## [1.3.0] — 2026-10-10
 
 ### Added
@@ -60,7 +66,8 @@ _Nothing yet._
 - Opcjonalne zapamiętywanie klucza API w pamięci sesyjnej karty.
 - Ranking na SQLite: trwałe kody, bilety i limity.
 
-[Unreleased]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/compare/v1.4.0...HEAD
+[1.4.0]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/compare/v1.2.1...v1.3.0
 [1.2.1]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/AmigoUK/Sekcja-zw-ok-projektu/compare/v1.1.0...v1.2.0
